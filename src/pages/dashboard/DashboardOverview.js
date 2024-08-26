@@ -39,15 +39,15 @@ export default () => {
             percentage={10.57}
           />
         </Col>
-        <Col xs={12} sm={6} xl={6} className="mb-4">
+        <Col xs={12} sm={6} xl={3} className="mb-4">
           <CounterWidget
-            category="Total Alloted Vacancies"
+            category="Alloted Vacancies"
             title={employee?.allotedVacancies?.length || 0}
             icon={faChartLine}
             to='/alloted-vacancies'
           />
         </Col>
-        <Col xs={12} sm={6} xl={6} className="mb-4">
+        <Col xs={12} sm={6} xl={3} className="mb-4">
           <CounterWidget
             category="Pending Vacancies"
             title={pendingVac}
@@ -55,16 +55,16 @@ export default () => {
             to='/pending-vacancies'
           />
         </Col>
-        <Col xs={12} sm={6} xl={6} className="mb-4">
+        <Col xs={12} sm={6} xl={3} className="mb-4">
           <CounterWidget
             category="Completed Vacancies"
             title={employee?.allotedVacancies?.length-pendingVac}
             icon={faCashRegister}
           />
         </Col>
-        <Col xs={12} sm={6} xl={6} className="mb-4">
+        <Col xs={12} sm={6} xl={3} className="mb-4">
           <CounterWidget
-            category="Email"
+            category="Emailed vacancies"
             title={pendingVac}
             icon={faCashRegister}
             to='/mail-sent'
