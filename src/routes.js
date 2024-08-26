@@ -4,7 +4,7 @@ import AllCompletedVacancies from "./pages/AllCompletedVacancies";
 export const Routes = {
     // pages
     // Presentation: { path: "/" },
-    DashboardOverview: { path: "/" },
+    DashboardOverview: { path: "/dashboard" },
     Transactions: { path: "/transactions" },
     Settings: { path: "/settings" },
     Vacancy: { path: "/add-vacancy" },
@@ -30,7 +30,7 @@ export const Routes = {
     BootstrapTables: { path: "/tables/bootstrap-tables" },
     Billing: { path: "/examples/billing" },
     Invoice: { path: "/examples/invoice" },
-    Signin: { path: "/examples/sign-in" },
+    Signin: { path: "/" },
     Signup: { path: "/examples/sign-up" },
     ForgotPassword: { path: "/examples/forgot-password" },
     ResetPassword: { path: "/examples/reset-password" },

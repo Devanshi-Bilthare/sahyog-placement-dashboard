@@ -6,10 +6,10 @@ const registerEmployee = async (employeeData)=>{
     console.log(config)
     const response = await axios.post(`${base_url}employee/`,employeeData,config)
     console.log(response)
-    if(response.data){
-        localStorage.setItem('employee',JSON.stringify(response.data))
-        localStorage.setItem('employeetoken',JSON.stringify(response.data.token))
-    }
+    // if(response.data){
+    //     localStorage.setItem('employee',JSON.stringify(response.data))
+    //     localStorage.setItem('employeetoken',JSON.stringify(response.data.token))
+    // }
     return response.data
 }
 const loginEmployee = async (employeeData)=>{

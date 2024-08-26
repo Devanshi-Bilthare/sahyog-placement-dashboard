@@ -29,7 +29,7 @@ export default () => {
   const formHandler = (e) => {
     e.preventDefault();
     dispatch(loginEmployee(formData))
-    history.push('/')
+    history.push('/candidate-list')
     // setTimeout(()=>{
     //  navigate('/volt-react-dashboard')
     // },10 0)

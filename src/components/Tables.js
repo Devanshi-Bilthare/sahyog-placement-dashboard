@@ -310,22 +310,7 @@ export const CandidateTable = () => {
               ))}
             </tbody>
           </Table>
-          <Card.Footer className="px-3 border-0 d-lg-flex align-items-center justify-content-between">
-            <Nav>
-              <Pagination className="mb-2 mb-lg-0">
-                <Pagination.Prev>Previous</Pagination.Prev>
-                <Pagination.Item active>1</Pagination.Item>
-                <Pagination.Item>2</Pagination.Item>
-                <Pagination.Item>3</Pagination.Item>
-                <Pagination.Item>4</Pagination.Item>
-                <Pagination.Item>5</Pagination.Item>
-                <Pagination.Next>Next</Pagination.Next>
-              </Pagination>
-            </Nav>
-            <small className="fw-bold">
-              Showing <b>{filteredCandidates?.length}</b> out of <b>{totalCandidates}</b> entries
-            </small>
-          </Card.Footer>
+          
         </Card.Body>
       </Card>
 
@@ -421,22 +406,7 @@ export const CandidateTableByJob = () => {
               ))}
             </tbody>
           </Table>
-          <Card.Footer className="px-3 border-0 d-lg-flex align-items-center justify-content-between">
-            <Nav>
-              <Pagination className="mb-2 mb-lg-0">
-                <Pagination.Prev>Previous</Pagination.Prev>
-                <Pagination.Item active>1</Pagination.Item>
-                <Pagination.Item>2</Pagination.Item>
-                <Pagination.Item>3</Pagination.Item>
-                <Pagination.Item>4</Pagination.Item>
-                <Pagination.Item>5</Pagination.Item>
-                <Pagination.Next>Next</Pagination.Next>
-              </Pagination>
-            </Nav>
-            <small className="fw-bold">
-              Showing <b>{filteredCandidates?.length}</b> out of <b>{totalCandidates}</b> entries
-            </small>
-          </Card.Footer>
+       
         </Card.Body>
       </Card>
 
@@ -493,26 +463,7 @@ export const EmployeeTable = () => {
             
           </tbody>
         </Table>
-        <Card.Footer className="px-3 border-0 d-lg-flex align-items-center justify-content-between">
-          <Nav>
-            <Pagination className="mb-2 mb-lg-0">
-              <Pagination.Prev>
-                Previous
-              </Pagination.Prev>
-              <Pagination.Item active>1</Pagination.Item>
-              <Pagination.Item>2</Pagination.Item>
-              <Pagination.Item>3</Pagination.Item>
-              <Pagination.Item>4</Pagination.Item>
-              <Pagination.Item>5</Pagination.Item>
-              <Pagination.Next>
-                Next
-              </Pagination.Next>
-            </Pagination>
-          </Nav>
-          <small className="fw-bold">
-            Showing <b>{totalEmployee}</b> out of <b>25</b> entries
-          </small>
-        </Card.Footer>
+      
       </Card.Body>
     </Card>
   );
@@ -565,26 +516,7 @@ export const CompanyTable = () => {
             
           </tbody>
         </Table>
-        <Card.Footer className="px-3 border-0 d-lg-flex align-items-center justify-content-between">
-          <Nav>
-            <Pagination className="mb-2 mb-lg-0">
-              <Pagination.Prev>
-                Previous
-              </Pagination.Prev>
-              <Pagination.Item active>1</Pagination.Item>
-              <Pagination.Item>2</Pagination.Item>
-              <Pagination.Item>3</Pagination.Item>
-              <Pagination.Item>4</Pagination.Item>
-              <Pagination.Item>5</Pagination.Item>
-              <Pagination.Next>
-                Next
-              </Pagination.Next>
-            </Pagination>
-          </Nav>
-          <small className="fw-bold">
-            Showing <b>{totalCompany}</b> out of <b>25</b> entries
-          </small>
-        </Card.Footer>
+    
       </Card.Body>
     </Card>
   );
@@ -665,22 +597,7 @@ export const VacancyTable = () => {
             ))}
           </tbody>
         </Table>
-        <Card.Footer className="px-3 border-0 d-lg-flex align-items-center justify-content-between">
-          <Nav>
-            <Pagination className="mb-2 mb-lg-0">
-              <Pagination.Prev>Previous</Pagination.Prev>
-              <Pagination.Item active>1</Pagination.Item>
-              <Pagination.Item>2</Pagination.Item>
-              <Pagination.Item>3</Pagination.Item>
-              <Pagination.Item>4</Pagination.Item>
-              <Pagination.Item>5</Pagination.Item>
-              <Pagination.Next>Next</Pagination.Next>
-            </Pagination>
-          </Nav>
-          <small className="fw-bold">
-            Showing <b>{totalVacancies}</b> out of <b>25</b> entries
-          </small>
-        </Card.Footer>
+    
       </Card.Body>
     </Card>
   );
@@ -768,22 +685,7 @@ export const AllCompletedVacancyTable = () => {
             )}
           </tbody>
         </Table>
-        <Card.Footer className="px-3 border-0 d-lg-flex align-items-center justify-content-between">
-          <Nav>
-            <Pagination className="mb-2 mb-lg-0">
-              <Pagination.Prev>Previous</Pagination.Prev>
-              <Pagination.Item active>1</Pagination.Item>
-              <Pagination.Item>2</Pagination.Item>
-              <Pagination.Item>3</Pagination.Item>
-              <Pagination.Item>4</Pagination.Item>
-              <Pagination.Item>5</Pagination.Item>
-              <Pagination.Next>Next</Pagination.Next>
-            </Pagination>
-          </Nav>
-          <small className="fw-bold">
-            Showing <b>{totalVacancies}</b> out of <b>25</b> entries
-          </small>
-        </Card.Footer>
+      
       </Card.Body>
     </Card>
   );
@@ -836,26 +738,7 @@ export const VacancyTableByCompany = ({vacancyListState}) => {
             }
           </tbody>
         </Table>
-        <Card.Footer className="px-3 border-0 d-lg-flex align-items-center justify-content-between">
-          <Nav>
-            <Pagination className="mb-2 mb-lg-0">
-              <Pagination.Prev>
-                Previous
-              </Pagination.Prev>
-              <Pagination.Item active>1</Pagination.Item>
-              <Pagination.Item>2</Pagination.Item>
-              <Pagination.Item>3</Pagination.Item>
-              <Pagination.Item>4</Pagination.Item>
-              <Pagination.Item>5</Pagination.Item>
-              <Pagination.Next>
-                Next
-              </Pagination.Next>
-            </Pagination>
-          </Nav>
-          <small className="fw-bold">
-            Showing <b>{totalVacancies}</b> out of <b>25</b> entries
-          </small>
-        </Card.Footer>
+      
       </Card.Body>
     </Card>
   );
@@ -905,26 +788,7 @@ export const JobAppliedBy = ({id}) => {
             }
           </tbody>
         </Table>
-        <Card.Footer className="px-3 border-0 d-lg-flex align-items-center justify-content-between">
-          <Nav>
-            <Pagination className="mb-2 mb-lg-0">
-              <Pagination.Prev>
-                Previous
-              </Pagination.Prev>
-              <Pagination.Item active>1</Pagination.Item>
-              <Pagination.Item>2</Pagination.Item>
-              <Pagination.Item>3</Pagination.Item>
-              <Pagination.Item>4</Pagination.Item>
-              <Pagination.Item>5</Pagination.Item>
-              <Pagination.Next>
-                Next
-              </Pagination.Next>
-            </Pagination>
-          </Nav>
-          <small className="fw-bold">
-            Showing <b>{totalVacancies}</b> out of <b>25</b> entries
-          </small>
-        </Card.Footer>
+      
       </Card.Body>
     </Card>
   );
@@ -999,22 +863,7 @@ export const AllotedVacansiesByEmployee = ({ vacancyListState,pending }) => {
             ))}
           </tbody>
         </Table>
-        <Card.Footer className="px-3 border-0 d-lg-flex align-items-center justify-content-between">
-          <Nav>
-            <Pagination className="mb-2 mb-lg-0">
-              <Pagination.Prev>Previous</Pagination.Prev>
-              <Pagination.Item active>1</Pagination.Item>
-              <Pagination.Item>2</Pagination.Item>
-              <Pagination.Item>3</Pagination.Item>
-              <Pagination.Item>4</Pagination.Item>
-              <Pagination.Item>5</Pagination.Item>
-              <Pagination.Next>Next</Pagination.Next>
-            </Pagination>
-          </Nav>
-          <small className="fw-bold">
-            Showing <b>{totalVacancies}</b> out of <b>25</b> entries
-          </small>
-        </Card.Footer>
+       
       </Card.Body>
     </Card>
   );
@@ -1069,22 +918,7 @@ export const MailSentVacanciesByEmployee = ({ vacancyListState }) => {
             ))}
           </tbody>
         </Table>
-        <Card.Footer className="px-3 border-0 d-lg-flex align-items-center justify-content-between">
-          <Nav>
-            <Pagination className="mb-2 mb-lg-0">
-              <Pagination.Prev>Previous</Pagination.Prev>
-              <Pagination.Item active>1</Pagination.Item>
-              <Pagination.Item>2</Pagination.Item>
-              <Pagination.Item>3</Pagination.Item>
-              <Pagination.Item>4</Pagination.Item>
-              <Pagination.Item>5</Pagination.Item>
-              <Pagination.Next>Next</Pagination.Next>
-            </Pagination>
-          </Nav>
-          <small className="fw-bold">
-            Showing <b>{totalVacancies}</b> out of <b>25</b> entries
-          </small>
-        </Card.Footer>
+      
       </Card.Body>
     </Card>
   );

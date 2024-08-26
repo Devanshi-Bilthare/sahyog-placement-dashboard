@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { Card, Form, Button, Row, Col } from '@themesberg/react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { registerEmployee } from '../features/employee/employeeSlice';
+import { useHistory } from 'react-router-dom';
 
 export const EmployeeForm = () => {
     const dispatch = useDispatch()
+    const history = useHistory()
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -23,6 +25,9 @@ export const EmployeeForm = () => {
     const formHandler = (e) => {
         e.preventDefault();
         dispatch(registerEmployee(formData))
+        setTimeout(()=>{
+            history.push('/employee-list')
+        },1000)
     };
 
     return (
