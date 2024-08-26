@@ -1,5 +1,4 @@
-.accordion-item {
-    /* color: var(--bs-accordion-color); */
-    background-color: none !important;
-    border: none !important;
+.accordion {
+    --bs-accordion-bg: none !important;
+    --bs-accordion-border-color: none !important;
 }
