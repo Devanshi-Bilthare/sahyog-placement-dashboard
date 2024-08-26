@@ -133,15 +133,15 @@ export default (props = {}) => {
                 <NavItem title="Bootstrap Table" link={Routes.BootstrapTables.path} />
               </CollapsableNavItem> */}
 
-              <CollapsableNavItem eventKey="examples/" title="Page Examples" icon={faFileAlt}>
+              {/* <CollapsableNavItem eventKey="examples/" title="Page Examples" icon={faFileAlt}> */}
                 <NavItem title="Sign In" link={Routes.Signin.path} />
-                <NavItem title="Sign Up" link={Routes.Signup.path} />
+                {/* <NavItem title="Sign Up" link={Routes.Signup.path} />
                 <NavItem title="Forgot password" link={Routes.ForgotPassword.path} />
                 <NavItem title="Reset password" link={Routes.ResetPassword.path} />
                 <NavItem title="Lock" link={Routes.Lock.path} />
                 <NavItem title="404 Not Found" link={Routes.NotFound.path} />
                 <NavItem title="500 Server Error" link={Routes.ServerError.path} />
-              </CollapsableNavItem>
+              </CollapsableNavItem> */}
 
               {/* <NavItem external title="Plugins" link="https://demo.themesberg.com/volt-pro-react/#/plugins/datatable" target="_blank" badgeText="Pro" icon={faChartPie} /> */}
 
