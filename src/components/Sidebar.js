@@ -13,6 +13,7 @@ import ThemesbergLogo from "../assets/img/themesberg.svg";
 import ReactHero from "../assets/img/technologies/react-hero-logo.svg";
 import ProfilePicture from "../assets/img/team/profile-picture-3.jpg";
 import { isEmployee, isLoggedIn } from "../utils/config";
+import './style.css'
 
 export default (props = {}) => {
   const location = useLocation();
