@@ -5,8 +5,9 @@ import { useLocation } from "react-router-dom";
 import { CSSTransition } from 'react-transition-group';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faBoxOpen, faChartPie, faCog, faFileAlt, faHandHoldingUsd, faSignOutAlt, faTable, faTimes, faCalendarAlt, faMapPin, faInbox, faRocket } from "@fortawesome/free-solid-svg-icons";
-import { Nav, Badge, Image, Button, Dropdown, Accordion, Navbar } from '@themesberg/react-bootstrap';
+import { Nav, Badge, Image, Button, Dropdown, Accordion, Navbar, Form, Row, Col } from '@themesberg/react-bootstrap';
 import { Link } from 'react-router-dom';
+import { CiSearch } from "react-icons/ci";
 
 import { Routes } from "../routes";
 import ThemesbergLogo from "../assets/img/themesberg.svg";
@@ -101,6 +102,21 @@ export default (props = {}) => {
             <Nav className="flex-column pt-3 pt-md-0">
               {/* <NavItem title="Volt React" link={Routes.Presentation.path} image={ReactHero} /> */}
            <h3>Dahboard</h3>
+           
+      <Form inline>
+        <Row>
+          <Col xs="auto">
+            <Form.Control
+              type="text"
+              placeholder="Search By Number"
+              className=" mr-sm-2"
+            />
+          </Col>
+          
+            
+          
+        </Row>
+      </Form>
               { isEmployee() ? <NavItem title="DashBoard" link={Routes.DashboardOverview.path} icon={faChartPie} /> : null }
               { isLoggedIn() ? <NavItem title="Admin DashBoard" link={Routes.DashboardAdmin.path} icon={faChartPie} /> : null }
               {/* <NavItem external title="Messages" link="/#/messages" target="_blank" badgeText="Pro" icon={faInbox} /> */}
