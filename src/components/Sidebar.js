@@ -102,6 +102,7 @@ export default (props = {}) => {
               {/* <NavItem title="Volt React" link={Routes.Presentation.path} image={ReactHero} /> */}
            <h3>Dahboard</h3>
               { isEmployee() ? <NavItem title="DashBoard" link={Routes.DashboardOverview.path} icon={faChartPie} /> : null }
+              { isLoggedIn() ? <NavItem title="Admin DashBoard" link={Routes.DashboardAdmin.path} icon={faChartPie} /> : null }
               {/* <NavItem external title="Messages" link="/#/messages" target="_blank" badgeText="Pro" icon={faInbox} /> */}
               {/* <NavItem title="Transactions" icon={faHandHoldingUsd} link={Routes.Transactions.path} /> */}
               <CollapsableNavItem eventKey="tables/" title="Candidate" icon={faTable}>

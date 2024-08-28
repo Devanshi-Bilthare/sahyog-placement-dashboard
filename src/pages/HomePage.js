@@ -38,6 +38,7 @@ import TotalPendingVacancies from '../components/TotalPendingVacancies';
 import CandidatesShortListedByJob from './CandidatesShortListedByJob'
 import AllCompletedVacancies from './AllCompletedVacancies';
 import MailSentVacanciesByEmployee from '../components/MailSentVacanciesByEmployee';
+import DashBoardAdmin from './dashboard/DashBoardAdmin';
 // import Forms from "./components/Forms";
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -100,6 +101,7 @@ export default () => (
     <RouteWithLoader exact path={Routes.ServerError.path} component={ServerError} />
     {/* pages */}
     <RouteWithSidebar exact path={Routes.DashboardOverview.path} component={DashboardOverview} />
+    <RouteWithSidebar exact path={Routes.DashboardAdmin.path} component={DashBoardAdmin} />
     {/* <RouteWithSidebar exact path={Routes.Upgrade.path} component={Upgrade} /> */}
     <RouteWithSidebar exact path={Routes.Transactions.path} component={Transactions} />
     <RouteWithSidebar exact path={Routes.Settings.path} component={Settings} />

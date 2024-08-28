@@ -45,6 +45,6 @@ const shortListedCandidateByJob = async(id)=>{
 }
 
 
-const candidateService = {candidateList,deleteCandidate,getSingleCandidate,editCandidate,jobsAppliedByCandidate,applyToJob,shortListedCandidateByJob}
+const candidateService = {candidateList,deleteCandidate,getSingleCandidate,editCandidate,jobsAppliedByCandidate,applyToJob,shortListedCandidateByJob,register}
 
 export default candidateService

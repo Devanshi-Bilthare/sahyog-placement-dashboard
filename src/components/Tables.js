@@ -796,15 +796,11 @@ export const JobAppliedBy = ({id}) => {
 
 
 export const AllotedVacansiesByEmployee = ({ vacancyListState,pending }) => {
-  console.log(pending)
   const dispatch = useDispatch();
-  const [vacStatus,setVacStatus] = useState("")
 
-  const totalVacancies = vacancyListState?.length;
-
+  // Handler to update the status of a specific vacancy
   const statusChangeHandler = (id, status) => {
-    dispatch(editVacancy({id, status})); 
-    setVacStatus(status)
+    dispatch(editVacancy({ id, status }));
   };
 
   return (
@@ -818,52 +814,58 @@ export const AllotedVacansiesByEmployee = ({ vacancyListState,pending }) => {
               <th className="border-bottom">Company Name</th>
               <th className="border-bottom">Location</th>
               <th className="border-bottom">Salary</th>
-              <th className="border-bottom">Dead Line</th>
+              <th className="border-bottom">Deadline</th>
               <th className="border-bottom">Status</th>
             </tr>
           </thead>
           <tbody>
             {vacancyListState?.map((vacancy, idx) => (
-              !pending ? <tr key={vacancy._id}>
-              <td className="border-bottom">{idx + 1}</td>
-              <td className="border-bottom"><Link to={`/candidate-shortlisted/${vacancy._id}`}>{vacancy.role}</Link></td>
-              <td className="border-bottom">{vacancy.companyName}</td>
-              <td className="border-bottom">{vacancy.jobLocation}</td>
-              <td className="border-bottom">{vacancy.salary}</td>
-              <td className="border-bottom">{vacancy.deadline}</td>
-              <td className="border-bottom">
-                <select
-                  value={vacStatus == "" ?vacancy.status : vacStatus}
-                  onChange={(e) => statusChangeHandler(vacancy._id, e.target.value)}
-                  className="form-select"
-                >
-                  <option value="completed">Completed</option>
-                  <option value="Pending">Pending</option>
-                </select>
-              </td>
-            </tr> : 
-            vacancy.status == 'Pending' ?<tr key={vacancy._id}>
-              <td className="border-bottom">{idx + 1}</td>
-              <td className="border-bottom"><Link to={`/candidate-shortlisted/${vacancy._id}`}>{vacancy.role}</Link></td>
-              <td className="border-bottom">{vacancy.companyName}</td>
-              <td className="border-bottom">{vacancy.jobLocation}</td>
-              <td className="border-bottom">{vacancy.salary}</td>
-              <td className="border-bottom">{vacancy.deadline}</td>
-              <td className="border-bottom">
-                <select
-                  value={vacStatus == "" ?vacancy.status : vacStatus}
-                  onChange={(e) => statusChangeHandler(vacancy._id, e.target.value)}
-                  className="form-select"
-                >
-                  <option value="completed">Completed</option>
-                  <option value="Pending">Pending</option>
-                </select>
-              </td>
-            </tr> : null
+              !pending ? (
+                <tr key={vacancy._id}>
+                  <td className="border-bottom">{idx + 1}</td>
+                  <td className="border-bottom">
+                    <Link to={`/candidate-shortlisted/${vacancy._id}`}>{vacancy.role}</Link>
+                  </td>
+                  <td className="border-bottom">{vacancy.companyName}</td>
+                  <td className="border-bottom">{vacancy.jobLocation}</td>
+                  <td className="border-bottom">{vacancy.salary}</td>
+                  <td className="border-bottom">{vacancy.deadline}</td>
+                  <td className="border-bottom">
+                    <select
+                      value={vacancy.status} // Ensure this reflects the current status
+                      onChange={(e) => statusChangeHandler(vacancy._id, e.target.value)}
+                      className="form-select"
+                    >
+                      <option value="completed">Completed</option>
+                      <option value="Pending">Pending</option>
+                    </select>
+                  </td>
+                </tr>
+              ) : (vacancy.status === 'Pending') ? (
+                <tr key={vacancy._id}>
+                  <td className="border-bottom">{idx + 1}</td>
+                  <td className="border-bottom">
+                    <Link to={`/candidate-shortlisted/${vacancy._id}`}>{vacancy.role}</Link>
+                  </td>
+                  <td className="border-bottom">{vacancy.companyName}</td>
+                  <td className="border-bottom">{vacancy.jobLocation}</td>
+                  <td className="border-bottom">{vacancy.salary}</td>
+                  <td className="border-bottom">{vacancy.deadline}</td>
+                  <td className="border-bottom">
+                    <select
+                      value={vacancy.status} // Ensure this reflects the current status
+                      onChange={(e) => statusChangeHandler(vacancy._id, e.target.value)}
+                      className="form-select"
+                    >
+                      <option value="completed">Completed</option>
+                      <option value="Pending">Pending</option>
+                    </select>
+                  </td>
+                </tr>
+              ) : null
             ))}
           </tbody>
         </Table>
-       
       </Card.Body>
     </Card>
   );

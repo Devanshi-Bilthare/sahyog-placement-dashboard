@@ -5,6 +5,7 @@ export const Routes = {
     // pages
     // Presentation: { path: "/" },
     DashboardOverview: { path: "/dashboard" },
+    DashboardAdmin: { path: "/dashboard-admin" },
     Transactions: { path: "/transactions" },
     Settings: { path: "/settings" },
     Vacancy: { path: "/add-vacancy" },
