@@ -16,7 +16,7 @@ export default () => {
 
   useEffect(() => {
     dispatch(getSingleCandidate(id));
-    dispatch(getSingleEmploye(currEmployee._id));
+    dispatch(getSingleEmploye(currEmployee?._id));
   }, [dispatch]);
 
   const candidateState = useSelector(state => state?.candidate?.singleCandidate);

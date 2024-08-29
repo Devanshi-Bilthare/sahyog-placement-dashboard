@@ -15,6 +15,8 @@ export const Routes = {
     Employer: { path: "/add-company" },
     Candidate: { path: "/add-candidate" },
     CandidateList: { path: "/candidate-list" },
+    // CandidateByNumber: { path: "/candidate-by-number" },
+    SouthTracker: {path:"/south-tracker/:id"},
     EditCandidate: { path: "/edit-candidate/:id" },
     CandidateDetail: { path: "/candidate-detail/:id" },
     CandidateShortListedByJob:{path:"/candidate-shortlisted/:id"},

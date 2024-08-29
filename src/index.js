@@ -16,6 +16,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter } from "react-router-dom";
+// import { ToastContainer } from 'react-toastify';
+// import 'react-toastify/ReactToastify.min.css';
 
 // core styles
 import "./scss/volt.scss";
@@ -33,6 +35,18 @@ ReactDOM.render(
   <Provider store={store}>
     <ScrollToTop />
     <HomePage />
+    {/* <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+    /> */}
   </Provider>
   </HashRouter>,
   document.getElementById("root")

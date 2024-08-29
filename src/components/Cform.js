@@ -4,6 +4,7 @@ import { registerCandidate } from '../features/candidate/candidateSlice';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+
 export const CandidateForm = () => {
   const dispatch = useDispatch();
 
