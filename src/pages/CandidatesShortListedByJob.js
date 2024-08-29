@@ -15,6 +15,8 @@ const CandidateList = () => {
   return (
     <>  
        <Button variant="light" className='mb-5'><Link to={`/south-tracker/${id}`}>South Tracker</Link></Button>
+       <Button variant="light" className='ms-5 mb-5'><Link to={`/west-tracker/${id}`}>West Tracker</Link></Button>
+       <Button variant="light" className='ms-5 mb-5'><Link to={`/central-tracker/${id}`}>Central Tracker</Link></Button>
         <CandidateTableByJob/>
     </>
   )

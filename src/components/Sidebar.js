@@ -1,13 +1,14 @@
 
 import React, { useState } from "react";
 import SimpleBar from 'simplebar-react';
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { CSSTransition } from 'react-transition-group';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faBoxOpen, faChartPie, faCog, faFileAlt, faHandHoldingUsd, faSignOutAlt, faTable, faTimes, faCalendarAlt, faMapPin, faInbox, faRocket } from "@fortawesome/free-solid-svg-icons";
 import { Nav, Badge, Image, Button, Dropdown, Accordion, Navbar, Form, Row, Col } from '@themesberg/react-bootstrap';
 import { Link } from 'react-router-dom';
 import { CiSearch } from "react-icons/ci";
+import Profile3 from "../assets/img/team/profile-pic.png";
 
 import { Routes } from "../routes";
 import ThemesbergLogo from "../assets/img/themesberg.svg";
@@ -15,14 +16,18 @@ import ReactHero from "../assets/img/technologies/react-hero-logo.svg";
 import ProfilePicture from "../assets/img/team/profile-picture-3.jpg";
 import { isEmployee, isLoggedIn } from "../utils/config";
 import './style.css'
+import { useSelector } from "react-redux";
+
 
 export default (props = {}) => {
   const location = useLocation();
   const { pathname } = location;
   const [show, setShow] = useState(false);
   const showClass = show ? "show" : "";
+  const history = useHistory()
 
   const onCollapse = () => setShow(!show);
+  const employee = useSelector(state => state?.employee?.employee)
 
   const CollapsableNavItem = (props) => {
     const { eventKey, title, icon, children = null } = props;
@@ -46,6 +51,16 @@ export default (props = {}) => {
       </Accordion>
     );
   };
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const searchTerm = form.elements['search'].value.trim();
+    if (searchTerm) {
+        history.push(`/candidates-by-number?search=${encodeURIComponent(searchTerm)}`);
+    }
+};
+
 
   const loggedOut = () =>{
     localStorage.clear();
@@ -91,13 +106,13 @@ export default (props = {}) => {
             <div className="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
               <div className="d-flex align-items-center">
                 <div className="user-avatar lg-avatar me-4">
-                  <Image src={ProfilePicture} className="card-img-top rounded-circle border-white" />
+                  <Image src={Profile3} className="card-img-top rounded-circle border-white" />
                 </div>
                 <div className="d-block">
-                  <h6>Hi, Jane</h6>
-                  <Button as={Link} variant="secondary" size="xs" to={Routes.Signin.path} className="text-dark">
-                    <FontAwesomeIcon icon={faSignOutAlt} className="me-2" /> Sign Out
-                  </Button>
+                  <h6>Hi, {employee?.name}</h6>
+                  {/* <Button as={Link} variant="secondary" size="xs" to={Routes.Signin.path} className="text-dark"> */}
+                    {/* <FontAwesomeIcon icon={faSignOutAlt} className="me-2" /> Sign Out */}
+                  {/* </Button> */}
                 </div>
               </div>
               <Nav.Link className="collapse-close d-md-none" onClick={onCollapse}>
@@ -108,20 +123,21 @@ export default (props = {}) => {
              
            <h3>Dahboard</h3>
            
-      <Form inline>
-        <Row>
-          <Col xs="auto">
-            <Form.Control
-              type="text"
-              placeholder="Search By Number"
-              className=" mr-sm-2"
-            />
-          </Col>
-          
-            
-          
-        </Row>
-      </Form>
+           <Form inline onSubmit={handleSearch}>
+            <Row>
+                <Col xs="auto">
+                    <Form.Control
+                        name="search"
+                        type="text"
+                        placeholder="Search By Number"
+                        className="mr-sm-2"
+                    />
+                </Col>
+                <Col xs="auto">
+                    <button type="submit" className="btn btn-primary">Search</button>
+                </Col>
+            </Row>
+        </Form>
               { isEmployee() ? <NavItem title="DashBoard" link={Routes.DashboardOverview.path} icon={faChartPie} /> : null }
               { isLoggedIn() ? <NavItem title="Admin DashBoard" link={Routes.DashboardAdmin.path} icon={faChartPie} /> : null }
              

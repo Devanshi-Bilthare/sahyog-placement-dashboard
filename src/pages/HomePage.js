@@ -45,6 +45,8 @@ import SouthTracker from './SouthTracker';
 
 // Import the authentication functions
 import { isLoggedIn, isEmployee } from '../utils/config'; // Adjust the import path accordingly
+import WestTracker from './WestTracker';
+import CentralTracker from './CentralTracker';
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -127,8 +129,11 @@ export default () => (
     {/* Routes for Employees */}
     <RouteWithSidebar exact path={Routes.CandidateList.path} component={CandidateList} condition={isLoggedIn() || isEmployee()} />
     <RouteWithSidebar exact path={Routes.AddEmployee.path} component={AddEmployee} condition={isLoggedIn()} />
+    <RouteWithSidebar exact path={Routes.CandidateByNumber.path} component={CandidateTableByNumber} condition={isLoggedIn() || isEmployee()} />
     
     <RouteWithSidebar exact path={Routes.SouthTracker.path} component={SouthTracker} condition={isLoggedIn() || isEmployee()} />
+    <RouteWithSidebar exact path={Routes.WestTracker.path} component={WestTracker} condition={isLoggedIn() || isEmployee()} />
+    <RouteWithSidebar exact path={Routes.CentralTracker.path} component={CentralTracker} condition={isLoggedIn() || isEmployee()} />
     <RouteWithSidebar exact path={Routes.EditCandidate.path} component={EditCandidate} condition={isLoggedIn() || isEmployee()} />
     <RouteWithSidebar exact path={Routes.CandidateDetail.path} component={CandidateDetail} condition={isLoggedIn() || isEmployee()} />
     <RouteWithSidebar exact path={Routes.CandidateShortListedByJob.path} component={CandidatesShortListedByJob} condition={isLoggedIn() || isEmployee()} />
