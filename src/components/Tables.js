@@ -306,7 +306,7 @@ export const CandidateTable = () => {
                   {/* <td className="border-bottom"> <a href={candidate?.resumeUrl} target="_blank" rel="noopener noreferrer">
     View Resume
   </a></td> */}
-                  <td className="border-bottom cursor-pointer" onClick={() => deleteHandler(candidate._id)}>  <FontAwesomeIcon icon={faTrashAlt} />
+                  <td className="border-bottom cursor-pointer" >  <FontAwesomeIcon onClick={() => deleteHandler(candidate._id)} icon={faTrashAlt} />
                     <Link className="ms-2" to={`/edit-candidate/${candidate._id}`}><FontAwesomeIcon icon={faEdit} /></Link>
                   </td>
                 </tr>
@@ -457,7 +457,7 @@ export const EmployeeTable = () => {
                 <td className="border-bottom"><Link to={`/employee-detail/${employee._id}`}>{employee.name}</Link></td>
                 <td className="border-bottom">{employee.mobile}</td>
                 {/* <td className="border-bottom">{employee.status}</td> */}
-                <th className="border-bottom cursor-pointer" onClick={()=> deleteHandler(employee._id)}>  <FontAwesomeIcon icon={faTrashAlt} /> 
+                <th className="border-bottom cursor-pointer" >  <FontAwesomeIcon onClick={()=> deleteHandler(employee._id)} icon={faTrashAlt} /> 
                 <Link className="ms-2" to={`/edit-employee/${employee._id}`}><FontAwesomeIcon icon={faEdit} /></Link></th>
                 </tr> : null
               }) 
@@ -510,7 +510,7 @@ export const CompanyTable = () => {
                 <td className="border-bottom">{company.contactPersonMobile}</td>
                 <td className="border-bottom">{company.contactPersonEmail}</td>
                 <td className="border-bottom">{company.city}</td>
-                <th className="border-bottom cursor-pointer" onClick={()=> deleteHandler(company._id)}>  <FontAwesomeIcon icon={faTrashAlt} /> <Link className="ms-2" to={`/edit-company/${company._id}`}><FontAwesomeIcon icon={faEdit} /></Link></th>
+                <th className="border-bottom cursor-pointer" >  <FontAwesomeIcon onClick={()=> deleteHandler(company._id)} icon={faTrashAlt} /> <Link className="ms-2" to={`/edit-company/${company._id}`}><FontAwesomeIcon icon={faEdit} /></Link></th>
                 </tr>
               }) 
             }
@@ -558,6 +558,7 @@ export const VacancyTable = () => {
               <th className="border-bottom">Company Name</th>
               <th className="border-bottom">Location</th>
               <th className="border-bottom">Salary</th>
+              <th className="border-bottom">Function</th>
               <th className="border-bottom">Alloted To</th>
               <th className="border-bottom">Dead Line</th>
               <th className="border-bottom"> Action </th>
@@ -572,6 +573,7 @@ export const VacancyTable = () => {
                 <td className="border-bottom">{vacancy.companyName}</td>
                 <td className="border-bottom">{vacancy.jobLocation}</td>
                 <td className="border-bottom">{vacancy.salary}</td>
+                <td className="border-bottom">{vacancy.jobFunction}</td>
                 <td className="border-bottom">
                   <Form.Control
                     as="select"
@@ -589,8 +591,8 @@ export const VacancyTable = () => {
                   </Form.Control>
                 </td>
                 <td className="border-bottom">{vacancy.deadline}</td>
-                <td className="border-bottom cursor-pointer" onClick={() => deleteHandler(vacancy._id)}>
-                    <FontAwesomeIcon icon={faTrashAlt} /> 
+                <td className="border-bottom cursor-pointer" >
+                    <FontAwesomeIcon onClick={() => deleteHandler(vacancy._id)} icon={faTrashAlt} /> 
                 
                   <Link className="ms-2" to={`/edit-vacancy/${vacancy._id}`}><FontAwesomeIcon icon={faEdit} /></Link>
                 </td>
@@ -731,7 +733,7 @@ export const VacancyTableByCompany = ({vacancyListState}) => {
                     <td className="border-bottom">{vacancy.jobLocation}</td>
                     <td className="border-bottom">{vacancy.salary}</td>
                     <td className="border-bottom">{vacancy.deadline}</td>
-                    <td className="border-bottom cursor-pointer" onClick={() => deleteHandler(vacancy._id)}>  <FontAwesomeIcon icon={faTrashAlt} /> </td>
+                    <td className="border-bottom cursor-pointer" >  <FontAwesomeIcon onClick={() => deleteHandler(vacancy._id)} icon={faTrashAlt} /> </td>
                     <td className="border-bottom"><Link to={`/edit-vacancy/${vacancy._id}`}><FontAwesomeIcon icon={faEdit} /></Link></td>
                   </tr>
                 );

@@ -39,7 +39,8 @@ export default () => {
     jobLocation: "",
     deadline: "",
     jobDescription: "",
-    allotedTo:""
+    allotedTo:"",
+    jobFunction:""
   });
 
   const handleVacancyChange = (e) => {
@@ -394,6 +395,21 @@ export default () => {
                       </Form.Control>
                     </Form.Group>
                   </Col>
+                </Row>
+                <Row>
+                  <Col md={6} className="mb-3">
+                    <Form.Group>
+                      <Form.Label>Function</Form.Label>
+                      <Form.Control
+                        required
+                        name="jobFunction"
+                        placeholder="Enter Job Function"
+                        value={vacancyFormData.jobFunction}
+                        onChange={handleVacancyChange}
+                      />
+                    </Form.Group>
+                  </Col>
+                 
                 </Row>
                 <Row>
                   <Col md={12} className="mb-3">
