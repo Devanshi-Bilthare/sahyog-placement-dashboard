@@ -282,7 +282,8 @@ export const CandidateTable = () => {
                 <th className="border-bottom">Candidate Name</th>
                 <th className="border-bottom">Mobile</th>
                 <th className="border-bottom">Status</th>
-                {/* <th className="border-bottom">  <FontAwesomeIcon icon={faTrashAlt} /> </th> */}
+                {/* <th className="border-bottom">Resume</th> */}
+                <th className="border-bottom"> Action </th>
                 {/* <th className="border-bottom"><FontAwesomeIcon icon={faEdit} /></th> */}
               </tr>
             </thead>
@@ -302,9 +303,11 @@ export const CandidateTable = () => {
                   </td>
                   <td className="border-bottom">{candidate.mobile}</td>
                   <td className="border-bottom">{candidate.status}</td>
-                  <td className="border-bottom cursor-pointer" onClick={() => deleteHandler(candidate._id)}>  <FontAwesomeIcon icon={faTrashAlt} /> </td>
-                  <td className="border-bottom">
-                    <Link to={`/edit-candidate/${candidate._id}`}><FontAwesomeIcon icon={faEdit} /></Link>
+                  {/* <td className="border-bottom"> <a href={candidate?.resumeUrl} target="_blank" rel="noopener noreferrer">
+    View Resume
+  </a></td> */}
+                  <td className="border-bottom cursor-pointer" onClick={() => deleteHandler(candidate._id)}>  <FontAwesomeIcon icon={faTrashAlt} />
+                    <Link className="ms-2" to={`/edit-candidate/${candidate._id}`}><FontAwesomeIcon icon={faEdit} /></Link>
                   </td>
                 </tr>
               ))}
@@ -385,7 +388,7 @@ export const CandidateTableByJob = () => {
                 <th className="border-bottom">Candidate Name</th>
                 <th className="border-bottom">Mobile</th>
                 <th className="border-bottom">Status</th>
-                {/* <th className="border-bottom">  <FontAwesomeIcon icon={faTrashAlt} /> </th> */}
+                <th className="border-bottom">  Action </th>
                 {/* <th className="border-bottom"><FontAwesomeIcon icon={faEdit} /></th> */}
               </tr>
             </thead>
@@ -439,7 +442,7 @@ export const EmployeeTable = () => {
                 <th className="border-bottom">S.NO</th>
                 <th className="border-bottom">Employee Name</th>
                 <th className="border-bottom">Mobile</th>
-                {/* <th className="border-bottom">Status</th> */}
+                 <th className="border-bottom">Action</th> 
                 {/* <th className="border-bottom">Total</th>
                 <th className="border-bottom">Status</th>
                 <th className="border-bottom">Action</th> */}
@@ -454,8 +457,8 @@ export const EmployeeTable = () => {
                 <td className="border-bottom"><Link to={`/employee-detail/${employee._id}`}>{employee.name}</Link></td>
                 <td className="border-bottom">{employee.mobile}</td>
                 {/* <td className="border-bottom">{employee.status}</td> */}
-                <th className="border-bottom cursor-pointer" onClick={()=> deleteHandler(employee._id)}>  <FontAwesomeIcon icon={faTrashAlt} /> </th>
-                <th className="border-bottom"><Link to={`/edit-employee/${employee._id}`}><FontAwesomeIcon icon={faEdit} /></Link></th>
+                <th className="border-bottom cursor-pointer" onClick={()=> deleteHandler(employee._id)}>  <FontAwesomeIcon icon={faTrashAlt} /> 
+                <Link className="ms-2" to={`/edit-employee/${employee._id}`}><FontAwesomeIcon icon={faEdit} /></Link></th>
                 </tr> : null
               }) 
             } 
@@ -493,7 +496,7 @@ export const CompanyTable = () => {
                 <th className="border-bottom">Contact Person Mobile</th>
                 <th className="border-bottom">Contact Person Email</th>
                 <th className="border-bottom">City</th>
-                {/* <th className="border-bottom">  <FontAwesomeIcon icon={faTrashAlt} /> </th> */}
+                <th className="border-bottom"> Action </th>
               </tr>
           </thead>
           <tbody>
@@ -507,8 +510,7 @@ export const CompanyTable = () => {
                 <td className="border-bottom">{company.contactPersonMobile}</td>
                 <td className="border-bottom">{company.contactPersonEmail}</td>
                 <td className="border-bottom">{company.city}</td>
-                <th className="border-bottom cursor-pointer" onClick={()=> deleteHandler(company._id)}>  <FontAwesomeIcon icon={faTrashAlt} /> </th>
-                <th className="border-bottom"><Link to={`/edit-company/${company._id}`}><FontAwesomeIcon icon={faEdit} /></Link></th>
+                <th className="border-bottom cursor-pointer" onClick={()=> deleteHandler(company._id)}>  <FontAwesomeIcon icon={faTrashAlt} /> <Link className="ms-2" to={`/edit-company/${company._id}`}><FontAwesomeIcon icon={faEdit} /></Link></th>
                 </tr>
               }) 
             }
@@ -558,7 +560,7 @@ export const VacancyTable = () => {
               <th className="border-bottom">Salary</th>
               <th className="border-bottom">Alloted To</th>
               <th className="border-bottom">Dead Line</th>
-              {/* <th className="border-bottom">  <FontAwesomeIcon icon={faTrashAlt} /> </th> */}
+              <th className="border-bottom"> Action </th>
               {/* <th className="border-bottom"><FontAwesomeIcon icon={faEdit} /></th> */}
             </tr>
           </thead>
@@ -589,9 +591,8 @@ export const VacancyTable = () => {
                 <td className="border-bottom">{vacancy.deadline}</td>
                 <td className="border-bottom cursor-pointer" onClick={() => deleteHandler(vacancy._id)}>
                     <FontAwesomeIcon icon={faTrashAlt} /> 
-                </td>
-                <td className="border-bottom">
-                  <Link to={`/edit-vacancy/${vacancy._id}`}><FontAwesomeIcon icon={faEdit} /></Link>
+                
+                  <Link className="ms-2" to={`/edit-vacancy/${vacancy._id}`}><FontAwesomeIcon icon={faEdit} /></Link>
                 </td>
               </tr>
             ))}

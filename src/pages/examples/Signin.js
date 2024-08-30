@@ -29,7 +29,7 @@ export default () => {
   const formHandler = (e) => {
     e.preventDefault();
     dispatch(loginEmployee(formData))
-   
+
     setTimeout(()=>{
      history.push('/candidate-list')
     },500)
@@ -57,14 +57,14 @@ export default () => {
                       <InputGroup.Text>
                         <FontAwesomeIcon icon={faEnvelope} />
                       </InputGroup.Text>
-                      <Form.Control 
+                      <Form.Control
                         name="email"
                         value={formData.email}
                         onChange={changeHandler}
-                        autoFocus 
-                        required 
-                        type="email" 
-                        placeholder="example@company.com" 
+                        autoFocus
+                        required
+                        type="email"
+                        placeholder="example@company.com"
                       />
                     </InputGroup>
                   </Form.Group>
@@ -74,55 +74,24 @@ export default () => {
                       <InputGroup.Text>
                         <FontAwesomeIcon icon={faUnlockAlt} />
                       </InputGroup.Text>
-                      <Form.Control 
+                      <Form.Control
                         name="password"
                         value={formData.password}
                         onChange={changeHandler}
-                        required 
-                        type="password" 
-                        placeholder="Password" 
+                        required
+                        type="password"
+                        placeholder="Password"
                       />
                     </InputGroup>
                   </Form.Group>
-                  <div className="d-flex justify-content-between align-items-center mb-4">
-                    <Form.Check 
-                      type="checkbox"
-                      name="rememberMe"
-                      checked={formData.rememberMe}
-                      onChange={changeHandler}
-                    >
-                      <FormCheck.Input id="defaultCheck5" className="me-2" />
-                      <FormCheck.Label htmlFor="defaultCheck5" className="mb-0">Remember me</FormCheck.Label>
-                    </Form.Check>
-                    <Card.Link className="small text-end">Lost password?</Card.Link>
-                  </div>
+                  
                   <Button variant="primary" type="submit" className="w-100">
                     Sign in
                   </Button>
                 </Form>
 
-                <div className="mt-3 mb-4 text-center">
-                  <span className="fw-normal">or login with</span>
-                </div>
-                <div className="d-flex justify-content-center my-4">
-                  <Button variant="outline-light" className="btn-icon-only btn-pill text-facebook me-2">
-                    <FontAwesomeIcon icon={faFacebookF} />
-                  </Button>
-                  <Button variant="outline-light" className="btn-icon-only btn-pill text-twitter me-2">
-                    <FontAwesomeIcon icon={faTwitter} />
-                  </Button>
-                  <Button variant="outline-light" className="btn-icon-only btn-pill text-dark">
-                    <FontAwesomeIcon icon={faGithub} />
-                  </Button>
-                </div>
-                <div className="d-flex justify-content-center align-items-center mt-4">
-                  <span className="fw-normal">
-                    Not registered?
-                    <Card.Link as={Link} to={Routes.Signup.path} className="fw-bold">
-                      {` Create account `}
-                    </Card.Link>
-                  </span>
-                </div>
+
+
               </div>
             </Col>
           </Row>

@@ -97,6 +97,7 @@ export const employeeSlice = createSlice({
             state.isLoading = false
             state.isSuccess = true
             state.logedEmployee = action.payload
+            window.location.reload()
             // if(state.isSuccess == true){
             //     console.log(state)
             //     toast.info("User Logged In")
