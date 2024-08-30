@@ -148,6 +148,7 @@ export default (props = {}) => {
                   <CollapsableNavItem eventKey="tables/" title="Vacancy" icon={faTable}>
                     <NavItem title="Vacancy List" link={Routes.VacancyList.path} />
                   </CollapsableNavItem>
+                  <NavItem title="Enquiries" link={Routes.Enquiry.path}  icon={faChartPie} />
                 </>
               )}
               {isLoggedIn() && <NavItem title="Completed Vacancies" link={Routes.AllCompletedVacancies.path} icon={faChartPie} />}

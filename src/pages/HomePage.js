@@ -48,6 +48,7 @@ import { isLoggedIn, isEmployee } from '../utils/config'; // Adjust the import p
 import WestTracker from './WestTracker';
 import CentralTracker from './CentralTracker';
 import TotalAllotedCompletedVacancy from '../components/TotalAllotedCompletedVacancy';
+import Enquiry from './Enquiry';
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -126,6 +127,7 @@ export default () => (
     <RouteWithSidebar exact path={Routes.TotalAllotedCompletedVacancies.path} component={TotalAllotedCompletedVacancy} condition={isLoggedIn() || isEmployee()} />
 
     <RouteWithSidebar exact path={Routes.AllCompletedVacancies.path} component={AllCompletedVacancies} condition={isLoggedIn()} />
+    <RouteWithSidebar exact path={Routes.Enquiry.path} component={Enquiry} condition={isLoggedIn()} />
     <RouteWithSidebar exact path={Routes.MailSentVacanciesByEmployee.path} component={MailSentVacanciesByEmployee} condition={isLoggedIn() || isEmployee()} />
     <RouteWithSidebar exact path={Routes.Employer.path} component={Employer} condition={isLoggedIn()} />
     <RouteWithSidebar exact path={Routes.Candidate.path} component={Candidate} condition={isLoggedIn() || isEmployee()} />

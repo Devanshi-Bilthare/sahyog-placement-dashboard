@@ -3,6 +3,7 @@ import candidateReducer from '../features/candidate/candidateSlice';
 import employeeReducer from '../features/employee/employeeSlice';
 import companyReducer from '../features/company/companySlice';
 import vacancyReducer from '../features/vacancy/vacancySlice';
+import contactReducer from '../features/contact/contactSlice';
 
 
 export const store = configureStore({
@@ -10,6 +11,7 @@ export const store = configureStore({
    candidate:candidateReducer,
    employee: employeeReducer,
    company:companyReducer,
-   vacancy:vacancyReducer
+   vacancy:vacancyReducer,
+   contact:contactReducer
   }
 });

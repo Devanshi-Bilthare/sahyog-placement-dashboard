@@ -16,8 +16,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter } from "react-router-dom";
-// import { ToastContainer } from 'react-toastify';
-// import 'react-toastify/ReactToastify.min.css';
 
 // core styles
 import "./scss/volt.scss";

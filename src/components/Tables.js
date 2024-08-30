@@ -984,6 +984,47 @@ export const MailSentVacanciesByEmployee = ({ vacancyListState }) => {
   );
 };
 
+export const EnquiryTable = () => {
+  const enquiries = useSelector(state => state.contact?.getAll)
+
+  return (
+    <Card border="light" className="table-wrapper table-responsive shadow-sm">
+      <Card.Body className="pt-0">
+        <Table hover className="user-table align-items-center">
+          <thead>
+          <tr>
+                <th className="border-bottom">S.NO</th>
+                <th className="border-bottom">Name</th>
+                <th className="border-bottom">Email</th>
+                <th className="border-bottom">Mobile</th>
+                <th className="border-bottom">Subject</th>
+                <th className="border-bottom">message</th>
+               
+              </tr>
+          </thead>
+          <tbody>
+          {
+              enquiries?.map((enq,idx)=> {
+                return <tr>
+                <td className="border-bottom">{idx+1}</td>
+                <td className="border-bottom">{enq?.name}</td>
+                <td className="border-bottom">{enq?.email}</td>
+                <td className="border-bottom">{enq?.phone}</td>
+                <td className="border-bottom">{enq?.subject}</td>
+                <td className="border-bottom">{enq?.message}</td>
+
+                </tr>
+              })
+            }
+          
+       
+          </tbody>
+        </Table>
+      </Card.Body>
+    </Card>
+  );
+};
+
 export const TransactionsTable = () => {
   const dispatch = useDispatch()
     useEffect(()=>{
