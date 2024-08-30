@@ -47,6 +47,7 @@ import SouthTracker from './SouthTracker';
 import { isLoggedIn, isEmployee } from '../utils/config'; // Adjust the import path accordingly
 import WestTracker from './WestTracker';
 import CentralTracker from './CentralTracker';
+import TotalAllotedCompletedVacancy from '../components/TotalAllotedCompletedVacancy';
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -121,6 +122,9 @@ export default () => (
     <RouteWithSidebar exact path={Routes.Vacancy.path} component={Vacancy} condition={isLoggedIn()} />
     <RouteWithSidebar exact path={Routes.TotalAllotedVacancies.path} component={TotalAllotedVacancies} condition={isLoggedIn() || isEmployee()} />
     <RouteWithSidebar exact path={Routes.TotalPendingVacancies.path} component={TotalPendingVacancies} condition={isLoggedIn() || isEmployee()} />
+
+    <RouteWithSidebar exact path={Routes.TotalAllotedCompletedVacancies.path} component={TotalAllotedCompletedVacancy} condition={isLoggedIn() || isEmployee()} />
+
     <RouteWithSidebar exact path={Routes.AllCompletedVacancies.path} component={AllCompletedVacancies} condition={isLoggedIn()} />
     <RouteWithSidebar exact path={Routes.MailSentVacanciesByEmployee.path} component={MailSentVacanciesByEmployee} condition={isLoggedIn() || isEmployee()} />
     <RouteWithSidebar exact path={Routes.Employer.path} component={Employer} condition={isLoggedIn()} />

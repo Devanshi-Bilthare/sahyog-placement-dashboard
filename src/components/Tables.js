@@ -874,6 +874,61 @@ export const AllotedVacansiesByEmployee = ({ vacancyListState,pending }) => {
   );
 };
 
+export const AllotedCompletedVacansiesByEmployee = ({ vacancyListState }) => {
+  const dispatch = useDispatch();
+
+  // Handler to update the status of a specific vacancy
+  const statusChangeHandler = (id, status) => {
+    dispatch(editVacancy({ id, status }));
+  };
+
+  return (
+    <Card border="light" className="table-wrapper table-responsive shadow-sm">
+      <Card.Body className="pt-0">
+        <Table hover className="user-table align-items-center">
+          <thead>
+            <tr>
+              <th className="border-bottom">S.NO</th>
+              <th className="border-bottom">Job Title</th>
+              <th className="border-bottom">Company Name</th>
+              <th className="border-bottom">Location</th>
+              <th className="border-bottom">Salary</th>
+              <th className="border-bottom">Deadline</th>
+              <th className="border-bottom">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {vacancyListState?.map((vacancy, idx) => (
+               (vacancy.status === 'completed') ? (
+                <tr key={vacancy._id}>
+                  <td className="border-bottom">{idx + 1}</td>
+                  <td className="border-bottom">
+                    <Link to={`/candidate-shortlisted/${vacancy._id}`}>{vacancy.role}</Link>
+                  </td>
+                  <td className="border-bottom">{vacancy.companyName}</td>
+                  <td className="border-bottom">{vacancy.jobLocation}</td>
+                  <td className="border-bottom">{vacancy.salary}</td>
+                  <td className="border-bottom">{vacancy.deadline}</td>
+                  <td className="border-bottom">
+                    <select
+                      value={vacancy.status} // Ensure this reflects the current status
+                      onChange={(e) => statusChangeHandler(vacancy._id, e.target.value)}
+                      className="form-select"
+                    >
+                      <option value="completed">Completed</option>
+                      <option value="Pending">Pending</option>
+                    </select>
+                  </td>
+                </tr>
+              ) : null
+            ))}
+          </tbody>
+        </Table>
+      </Card.Body>
+    </Card>
+  );
+};
+
 export const MailSentVacanciesByEmployee = ({ vacancyListState }) => {
   const dispatch = useDispatch();
   const [vacStatus,setVacStatus] = useState("")

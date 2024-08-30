@@ -11,6 +11,7 @@ export const Routes = {
     Vacancy: { path: "/add-vacancy" },
     TotalAllotedVacancies:{path:'/alloted-vacancies'},
     TotalPendingVacancies:{path:'/pending-vacancies'},
+    TotalAllotedCompletedVacancies:{path:'/completed-vacancies'},
     MailSentVacanciesByEmployee:{path:'/mail-sent'},
     Employer: { path: "/add-company" },
     Candidate: { path: "/add-candidate" },

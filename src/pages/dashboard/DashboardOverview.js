@@ -10,6 +10,7 @@ import { AllotedVacansiesByEmployee } from "../../components/Tables";
 export default () => {
   const dispatch = useDispatch();
   const [pendingVac, setPendingVac] = useState(0);
+  const [mail, setMail] = useState(0);
 
   const currentEmployee = useSelector(state => state.employee?.employee);
   const employee = useSelector(state => state.employee?.singleEmployee);
@@ -25,6 +26,8 @@ export default () => {
       // Count the number of vacancies with a status of "Pending"
       const pendingCount = employee.allotedVacancies.filter(vac => vac.status === "Pending").length;
       setPendingVac(pendingCount);
+      const mailCount = employee.allotedVacancies.filter(vac => vac.mail === "sent").length;
+      setMail(mailCount)
     }
   }, [employee]);
 
@@ -60,12 +63,13 @@ export default () => {
             category="Completed Vacancies"
             title={employee?.allotedVacancies?.length-pendingVac}
             icon={faCashRegister}
+            to='/completed-vacancies'
           />
         </Col>
         <Col xs={12} sm={6} xl={3} className="mb-4">
           <CounterWidget
             category="Emailed vacancies"
-            title={pendingVac}
+            title={mail}
             icon={faCashRegister}
             to='/mail-sent'
           />
