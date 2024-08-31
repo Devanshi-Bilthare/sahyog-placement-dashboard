@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { Card, Table } from '@themesberg/react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
@@ -9,6 +9,7 @@ import { candidateList } from '../features/candidate/candidateSlice';
 export default () => {
     const [searchNumber, setSearchNumber] = useState('');
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
@@ -26,6 +27,12 @@ export default () => {
     const filteredCandidates = candidateListState?.filter(candidate =>
         candidate.mobile.includes(searchNumber) // Assuming 'number' is a field in your candidate data
     );
+
+    useEffect(()=>{
+        if(filteredCandidates?.length === 0){
+            history.push('/add-candidate')
+        }
+    },[filteredCandidates])
 
     console.log(filteredCandidates)
 

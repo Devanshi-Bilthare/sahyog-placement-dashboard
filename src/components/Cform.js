@@ -482,7 +482,7 @@ export const CandidateForm = () => {
           </div>
 
           <Button variant="primary" type="submit">
-            Submit
+            Add Candidate
           </Button>
         </Form>
       </Card.Body>

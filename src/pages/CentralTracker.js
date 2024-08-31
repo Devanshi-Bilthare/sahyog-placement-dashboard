@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Card, Col, Form, Table } from '@themesberg/react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +10,7 @@ export default () => {
     const dispatch = useDispatch()
     const [searchTerm, setSearchTerm] = useState(''); // State for search input
     const [statusFilter, setStatusFilter] = useState(''); // State for status filter
+    const [selectedCandidates, setSelectedCandidates] = useState([]);
 
     const candidateListState = useSelector(state => state?.candidate?.shortListedCandidateByJob);
     const vacancy = useSelector(state => state.vacancy?.singleVacancy)
@@ -25,8 +26,12 @@ export default () => {
     dispatch(getSingleVacancies(id))
   },[])
 
-  const csvData = filteredCandidates?.map((candidate, idx) => ({
-    'Sr. NO': idx + 1, // Serial Number
+  const csvData = useMemo(() => {
+    const candidatesToExport = selectedCandidates.length > 0 ? selectedCandidates : filteredCandidates;
+    if (!candidatesToExport || candidatesToExport.length === 0) return [];
+    
+    return candidatesToExport.map((candidate, idx) => ({
+      'Sr. NO': idx + 1, // Serial Number
     'Consultant Name': candidate.consultantName || '', // Consultant Name
     'Name Of Candidate': candidate.name || '', // Name Of Candidate
     'Phone No': candidate.mobile || '', // Phone No
@@ -50,7 +55,35 @@ export default () => {
     'Is the on-roll opportunity explained with 18 months clause?': candidate.onRollOpportunityExplained ? 'Yes' : 'No', // Is the on-roll opportunity explained with 18 months clause?
     'Do they have two wheeler and two wheeler license': candidate.twoWheelerAvailable ? 'Yes' : 'No', // Do they have two wheeler and two wheeler license
     'Communication skills rate by scale of 10': candidate.communicationSkillsRate || '', // Communication skills rate by scale of 10
-}));
+    }));
+  }, [selectedCandidates, filteredCandidates, vacancy]);
+
+//   const csvData = filteredCandidates?.map((candidate, idx) => ({
+//     'Sr. NO': idx + 1, // Serial Number
+//     'Consultant Name': candidate.consultantName || '', // Consultant Name
+//     'Name Of Candidate': candidate.name || '', // Name Of Candidate
+//     'Phone No': candidate.mobile || '', // Phone No
+//     'Location': candidate.jobLocation || '', // Location
+//     'Qualification': candidate.highestQualification || '', // Qualification
+//     'Last Company Name': candidate.lastCompanyName || '', // Last Company Name
+//     'Industry': candidate.industry || '', // Industry
+//     'Experience': candidate.experience || '', // Experience
+//     'Remark': candidate.remark || '', // Remark
+//     'DOB': candidate.dob || '', // Date of Birth
+//     'Age': candidate.age || '', // Age (calculate if needed)
+//     'Gender': candidate.gender || '', // Gender
+//     'Mail ID': candidate.email || '', // Mail ID
+//     'Qualification Percentage': candidate.qualificationPercentage || '', // Qualification Percentage
+//     'Hsc Year': candidate.twelfthPassingYear || '', // Hsc Year
+//     'Hsc Percentage': candidate.twelfthPercentage || '', // Hsc Percentage
+//     'SSc Year': candidate.tenthPassingYear || '', // SSc Year
+//     'SSc Percentage': candidate.tenthPercentage || '', // SSc Percentage
+//     'Is CTC informed and okay?': candidate.ctcInformed ? 'Yes' : 'No', // Is CTC informed and okay?
+//     'Is off-roll nature of job okay with candidate?': candidate.offRollNature ? 'Yes' : 'No', // Is off-roll nature of job okay with candidate?
+//     'Is the on-roll opportunity explained with 18 months clause?': candidate.onRollOpportunityExplained ? 'Yes' : 'No', // Is the on-roll opportunity explained with 18 months clause?
+//     'Do they have two wheeler and two wheeler license': candidate.twoWheelerAvailable ? 'Yes' : 'No', // Do they have two wheeler and two wheeler license
+//     'Communication skills rate by scale of 10': candidate.communicationSkillsRate || '', // Communication skills rate by scale of 10
+// }));
 
 
   
@@ -80,6 +113,7 @@ export default () => {
           <Table hover className="user-table align-items-center">
             <thead>
               <tr>
+              <th className="border-bottom">Select</th>
                 <th className="border-bottom">Sr.NO</th>
                 <th className="border-bottom">Consultant Name</th>
                 <th className="border-bottom">Name Of Candidate</th>
@@ -119,6 +153,19 @@ export default () => {
             <tbody>
               {filteredCandidates?.map((candidate, idx) => (
                 <tr key={candidate._id}>
+                   <td className="border-bottom">
+                    <input
+                      type="checkbox"
+                      checked={selectedCandidates.some(selected => selected._id === candidate._id)}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          setSelectedCandidates(prev => [...prev, candidate]);
+                        } else {
+                          setSelectedCandidates(prev => prev.filter(selected => selected._id !== candidate._id));
+                        }
+                      }}
+                    />
+                  </td>
                   <td className="border-bottom">{idx + 1}</td>
                   <td className="border-bottom"></td> 
                   <td className="border-bottom">

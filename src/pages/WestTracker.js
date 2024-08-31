@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Card, Col, Form, Table } from '@themesberg/react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +10,7 @@ export default () => {
     const dispatch = useDispatch()
     const [searchTerm, setSearchTerm] = useState(''); // State for search input
     const [statusFilter, setStatusFilter] = useState(''); // State for status filter
+    const [selectedCandidates, setSelectedCandidates] = useState([]);
 
     const candidateListState = useSelector(state => state?.candidate?.shortListedCandidateByJob);
     const vacancy = useSelector(state => state.vacancy?.singleVacancy)
@@ -25,29 +26,58 @@ export default () => {
     dispatch(getSingleVacancies(id))
   },[])
 
-  const csvData = filteredCandidates?.map((candidate, idx) => ({
-    SNO: idx + 1,
-    ConsultantName: candidate.consultantName || '', // Consultant Name
-    CandidateName: candidate.name || '', // Name of Candidate
-    DOB: candidate.dob || '', // DOB
-    Age: candidate.age || '', // Age, calculate if not directly available
-    Gender: candidate.gender || '', // Gender
-    PhoneNo: candidate.mobile || '', // Phone No
-    EmailID: candidate.email || '', // Mail ID
-    QualificationYear: candidate.highestQualificationYear || '', // Qualification (last degree) year
-    QualificationPercentage: candidate.highestQualificationPercentage || '', // Percentage for Qualification
-    HscYear: candidate.twelfthPassingYear || '', // Hsc Year
-    HscPercentage: candidate.twelfthPercentage || '', // Percentage for Hsc
-    SscYear: candidate.tenthPassingYear || '', // SSc Year
-    SscPercentage: candidate.tenthPercentage || '', // Percentage for SSc
-    "Is job profile explained and okay with candidate? ": candidate.jobProfileExplained ? 'Yes' : 'No', // Is job profile explained and okay with candidate?
-   "Is CTC informed and okay? ": candidate.ctcInformed ? 'Yes' : 'No', // Is CTC informed and okay?
-    "Is off-roll nature of job okay with candidate? ": candidate.onRollOpportunityExplained ? 'Yes' : 'No', // Is the on-roll opportunity explained with 18 months clause?
-    "Is the on-roll opportunity explained with 18 months clause? ": candidate.onRollOpportunityExplained ? 'Yes' : 'No',
-    CommunicationSkills: candidate.communicationSkills || '', // Communication skills
-    "Qualitative Feedback On Candidate": candidate.qualitativeFeedback || '', // Qualitative feedback on candidate
-    Remark: candidate.remark || '' // Remark
-}));
+  const csvData = useMemo(() => {
+    const candidatesToExport = selectedCandidates.length > 0 ? selectedCandidates : filteredCandidates;
+    if (!candidatesToExport || candidatesToExport.length === 0) return [];
+    
+    return candidatesToExport.map((candidate, idx) => ({
+      SNO: idx + 1,
+      ConsultantName: candidate.consultantName || '', // Consultant Name
+      CandidateName: candidate.name || '', // Name of Candidate
+      DOB: candidate.dob || '', // DOB
+      Age: candidate.age || '', // Age, calculate if not directly available
+      Gender: candidate.gender || '', // Gender
+      PhoneNo: candidate.mobile || '', // Phone No
+      EmailID: candidate.email || '', // Mail ID
+      QualificationYear: candidate.highestQualificationYear || '', // Qualification (last degree) year
+      QualificationPercentage: candidate.highestQualificationPercentage || '', // Percentage for Qualification
+      HscYear: candidate.twelfthPassingYear || '', // Hsc Year
+      HscPercentage: candidate.twelfthPercentage || '', // Percentage for Hsc
+      SscYear: candidate.tenthPassingYear || '', // SSc Year
+      SscPercentage: candidate.tenthPercentage || '', // Percentage for SSc
+      "Is job profile explained and okay with candidate? ": candidate.jobProfileExplained ? 'Yes' : 'No', // Is job profile explained and okay with candidate?
+     "Is CTC informed and okay? ": candidate.ctcInformed ? 'Yes' : 'No', // Is CTC informed and okay?
+      "Is off-roll nature of job okay with candidate? ": candidate.onRollOpportunityExplained ? 'Yes' : 'No', // Is the on-roll opportunity explained with 18 months clause?
+      "Is the on-roll opportunity explained with 18 months clause? ": candidate.onRollOpportunityExplained ? 'Yes' : 'No',
+      CommunicationSkills: candidate.communicationSkills || '', // Communication skills
+      "Qualitative Feedback On Candidate": candidate.qualitativeFeedback || '', // Qualitative feedback on candidate
+      Remark: candidate.remark || '' // Remark
+    }));
+  }, [selectedCandidates, filteredCandidates, vacancy]);
+
+//   const csvData = filteredCandidates?.map((candidate, idx) => ({
+//     SNO: idx + 1,
+//     ConsultantName: candidate.consultantName || '', // Consultant Name
+//     CandidateName: candidate.name || '', // Name of Candidate
+//     DOB: candidate.dob || '', // DOB
+//     Age: candidate.age || '', // Age, calculate if not directly available
+//     Gender: candidate.gender || '', // Gender
+//     PhoneNo: candidate.mobile || '', // Phone No
+//     EmailID: candidate.email || '', // Mail ID
+//     QualificationYear: candidate.highestQualificationYear || '', // Qualification (last degree) year
+//     QualificationPercentage: candidate.highestQualificationPercentage || '', // Percentage for Qualification
+//     HscYear: candidate.twelfthPassingYear || '', // Hsc Year
+//     HscPercentage: candidate.twelfthPercentage || '', // Percentage for Hsc
+//     SscYear: candidate.tenthPassingYear || '', // SSc Year
+//     SscPercentage: candidate.tenthPercentage || '', // Percentage for SSc
+//     "Is job profile explained and okay with candidate? ": candidate.jobProfileExplained ? 'Yes' : 'No', // Is job profile explained and okay with candidate?
+//    "Is CTC informed and okay? ": candidate.ctcInformed ? 'Yes' : 'No', // Is CTC informed and okay?
+//     "Is off-roll nature of job okay with candidate? ": candidate.onRollOpportunityExplained ? 'Yes' : 'No', // Is the on-roll opportunity explained with 18 months clause?
+//     "Is the on-roll opportunity explained with 18 months clause? ": candidate.onRollOpportunityExplained ? 'Yes' : 'No',
+//     CommunicationSkills: candidate.communicationSkills || '', // Communication skills
+//     "Qualitative Feedback On Candidate": candidate.qualitativeFeedback || '', // Qualitative feedback on candidate
+//     Remark: candidate.remark || '' // Remark
+// }));
 
   
 
@@ -76,6 +106,7 @@ export default () => {
           <Table hover className="user-table align-items-center">
             <thead>
               <tr>
+                <th className="border-bottom">Select</th>
                 <th className="border-bottom">Sr.NO</th>
                 <th className="border-bottom">Consultant Name</th>
                 <th className="border-bottom">Name Of Candidate</th>
@@ -102,6 +133,19 @@ export default () => {
             <tbody>
               {filteredCandidates?.map((candidate, idx) => (
                 <tr key={candidate._id}>
+                  <td className="border-bottom">
+                    <input
+                      type="checkbox"
+                      checked={selectedCandidates.some(selected => selected._id === candidate._id)}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          setSelectedCandidates(prev => [...prev, candidate]);
+                        } else {
+                          setSelectedCandidates(prev => prev.filter(selected => selected._id !== candidate._id));
+                        }
+                      }}
+                    />
+                  </td>
                   <td className="border-bottom">{idx + 1}</td>
                   <td className="border-bottom"></td> 
                   <td className="border-bottom">
