@@ -1,3 +1,4 @@
+import AllotedVacancies from "./components/Admin/AllotedVacancies";
 import MailSentVacanciesByEmployee from "./components/MailSentVacanciesByEmployee";
 import AllCompletedVacancies from "./pages/AllCompletedVacancies";
 
@@ -10,6 +11,10 @@ export const Routes = {
     Settings: { path: "/settings" },
     Vacancy: { path: "/add-vacancy" },
     TotalAllotedVacancies:{path:'/alloted-vacancies'},
+    AllotedVacancies:{path:'/admin/alloted-vacancies'},
+    AdminPending:{path:'/admin/pending-vacancies'},
+    AdminCompleted:{path:'/admin/completed-vacancies'},
+    AdminEmailNotSent:{path:'/admin/emailSent-vacancies'},
     TotalPendingVacancies:{path:'/pending-vacancies'},
     TotalAllotedCompletedVacancies:{path:'/completed-vacancies'},
     MailSentVacanciesByEmployee:{path:'/mail-sent'},

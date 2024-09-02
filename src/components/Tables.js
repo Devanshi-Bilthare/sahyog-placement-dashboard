@@ -606,6 +606,70 @@ export const VacancyTable = () => {
   );
 };
 
+export const AdminTable = ({vacancyListState}) => {
+  const dispatch = useDispatch()
+  const [updatedVacancy, setUpdatedVacancy] = useState({});
+  const employees = useSelector((state) => state?.employee?.allEmployees);
+
+
+  const handleAllotedToChange = (vacancyId, employeeId) => {
+    setUpdatedVacancy({ ...updatedVacancy, [vacancyId]: employeeId });
+    dispatch(editVacancy({ id: vacancyId, allotedTo: employeeId }));
+  };
+  return (
+    <Card border="light" className="table-wrapper table-responsive shadow-sm">
+      <Card.Body className="pt-0">
+        <Table hover className="user-table align-items-center">
+          <thead>
+            <tr>
+              <th className="border-bottom">S.NO</th>
+              <th className="border-bottom">Job Title</th>
+              <th className="border-bottom">Company Name</th>
+              <th className="border-bottom">Location</th>
+              <th className="border-bottom">Salary</th>
+              <th className="border-bottom">Function</th>
+              <th className="border-bottom">Alloted To</th>
+              <th className="border-bottom">Dead Line</th>
+              {/* <th className="border-bottom"> Action </th> */}
+              {/* <th className="border-bottom"><FontAwesomeIcon icon={faEdit} /></th> */}
+            </tr>
+          </thead>
+          <tbody>
+            {vacancyListState?.map((vacancy, idx) => (
+              <tr key={vacancy._id}>
+                <td className="border-bottom">{idx + 1}</td>
+                <td className="border-bottom"><Link to={`/candidate-shortlisted/${vacancy._id}`}>{vacancy.role}</Link></td>
+                <td className="border-bottom">{vacancy.companyName}</td>
+                <td className="border-bottom">{vacancy.jobLocation}</td>
+                <td className="border-bottom">{vacancy.salary}</td>
+                <td className="border-bottom">{vacancy.jobFunction}</td>
+                <td className="border-bottom">
+                  <Form.Control
+                    as="select"
+                    value={updatedVacancy[vacancy._id] || vacancy.allotedTo?._id || ''}
+                    onChange={(e) => handleAllotedToChange(vacancy._id, e.target.value)}
+                  >
+                    <option value="">Select Employee</option>
+                    {employees?.map((employee) => (
+                      employee.role !== 'admin' ? (
+                        <option key={employee._id} value={employee._id}>
+                          {employee.name}
+                        </option>
+                      ) : null
+                    ))}
+                  </Form.Control>
+                </td>
+                <td className="border-bottom">{vacancy.deadline}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+    
+      </Card.Body>
+    </Card>
+  );
+};
+
 export const AllCompletedVacancyTable = () => {
   const dispatch = useDispatch();
   const formatDate = (isoString) => new Date(isoString).toLocaleString();

@@ -1,77 +1,147 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCashRegister, faChartLine, faPlus, faRocket, faTasks, faUserShield, faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons';
-import { Col, Row, Button, Dropdown, ButtonGroup } from '@themesberg/react-bootstrap';
+import { faCashRegister, faChartLine } from '@fortawesome/free-solid-svg-icons';
+import { Col, Row } from '@themesberg/react-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
-import { getSingleEmploye } from "../../features/employee/employeeSlice";
-import { CounterWidget, SalesValueWidgetPhone } from "../../components/Widgets";
-import { AllotedVacansiesByEmployee } from "../../components/Tables";
+import { CounterWidget } from "../../components/Widgets";
+import { getAllVacancies } from "../../features/vacancy/vacancySlice";
+import { getAllEmployees, getSingleEmploye } from "../../features/employee/employeeSlice";
 
 export default () => {
   const dispatch = useDispatch();
-  const [pendingVac, setPendingVac] = useState(0);
+ 
+  const allVacancies = useSelector(state => state.vacancy?.allVacancies);
+  const allEmployees = useSelector(state => state.employee?.allEmployees);
+  const singleEmployeeData = useSelector(state => state.employee?.singleEmployee);
 
-  const currentEmployee = useSelector(state => state.employee?.employee);
-  const employee = useSelector(state => state.employee?.singleEmployee);
+  const [vacancyCounts, setVacancyCounts] = useState({
+    alloted: 0,
+    pending: 0,
+    completed: 0,
+    emailed: 0,
+  });
+
+  const [employeesData, setEmployeesData] = useState({});
 
   useEffect(() => {
-    if (currentEmployee?._id) {
-      dispatch(getSingleEmploye(currentEmployee._id));
-    }
-  }, [dispatch, currentEmployee]);
+    dispatch(getAllVacancies());
+    dispatch(getAllEmployees());
+  }, [dispatch]);
 
   useEffect(() => {
-    if (employee?.allotedVacancies) {
-      // Count the number of vacancies with a status of "Pending"
-      const pendingCount = employee.allotedVacancies.filter(vac => vac.status === "Pending").length;
-      setPendingVac(pendingCount);
+    if (allVacancies) {
+      const allotedCount = allVacancies.filter(vacancy => vacancy.allotedTo).length;
+      const pendingCount = allVacancies.filter(vacancy => vacancy.status === "Pending").length;
+      const completedCount = allVacancies.filter(vacancy => vacancy.status === "completed").length;
+      const emailSent = allVacancies.filter(vacancy => vacancy.status === "completed" && vacancy.mail === "sent").length;
+
+      setVacancyCounts({
+        alloted: allotedCount,
+        pending: pendingCount,
+        completed: completedCount,
+        emailed: emailSent,
+      });
     }
-  }, [employee]);
+  }, [allVacancies]);
+
+  const fetchEmployeeData = (employeeId) => {
+    dispatch(getSingleEmploye(employeeId));
+  };
+
+  useEffect(() => {
+    if (singleEmployeeData) {
+      setEmployeesData(prevData => ({
+        ...prevData,
+        [singleEmployeeData._id]: singleEmployeeData,
+      }));
+    }
+  }, [singleEmployeeData]);
 
   return (
     <>
-
       <Row className="justify-content-md-center">
-        {/* <Col xs={12} className="mb-4 d-sm-none">
-          <SalesValueWidgetPhone
-            title="Sales Value"
-            value="10,567"
-            percentage={10.57}
-          />
-        </Col> */}
         <Col xs={12} sm={6} xl={3} className="mb-4">
           <CounterWidget
-            category="Alloted Vacancies"
-            title={employee?.allotedVacancies?.length || 0}
+            category="Total Alloted Vacancies"
+            title={vacancyCounts.alloted}
             icon={faChartLine}
-            // to='/alloted-vacancies'
+            to='/admin/alloted-vacancies'
           />
         </Col>
         <Col xs={12} sm={6} xl={3} className="mb-4">
           <CounterWidget
-            category="Pending Vacancies"
-            title={pendingVac}
+            category="Total Pending Vacancies"
+            title={vacancyCounts.pending}
             icon={faCashRegister}
-            // to='/pending-vacancies'
+            to='/admin/pending-vacancies'
           />
         </Col>
         <Col xs={12} sm={6} xl={3} className="mb-4">
           <CounterWidget
-            category="Completed Vacancies"
-            title={employee?.allotedVacancies?.length-pendingVac}
+            category="Total Completed Vacancies"
+            title={vacancyCounts.completed}
             icon={faCashRegister}
+            to='/admin/completed-vacancies'
           />
         </Col>
         <Col xs={12} sm={6} xl={3} className="mb-4">
           <CounterWidget
             category="Emailed vacancies"
-            title={pendingVac}
+            title={vacancyCounts.emailed}
             icon={faCashRegister}
-            // to='/mail-sent'
+            to='/admin/emailSent-vacancies'
           />
         </Col>
       </Row>
-      {/* <AllotedVacansiesByEmployee pending={true}  vacancyListState={employee?.allotedVacancies}/> */}
+
+      {allEmployees?.map(emp => {
+        if (emp.role !== "admin") {
+          if (!employeesData[emp._id]) {
+            fetchEmployeeData(emp._id);
+          }
+          
+          const employeeData = employeesData[emp._id] || {};
+          const employeePendingVacancies = employeeData.allotedVacancies?.filter(
+            vacancy => vacancy.status === "Pending"
+          ).length || 0;
+          const employeeCompletedVacancies = employeeData.allotedVacancies?.filter(
+            vacancy => vacancy.status === "completed"
+          ).length || 0;
+
+          return (
+            <React.Fragment key={emp._id}>
+              <h1>{emp?.name}</h1>
+              <Row className="">
+                <Col xs={12} sm={6} xl={3} className="mb-4">
+                  <CounterWidget
+                    category="Alloted Vacancies"
+                    title={employeeData.allotedVacancies?.length || 0}
+                    icon={faChartLine}
+                    to={`/employee-detail/${emp._id}`}
+                  />
+                </Col>
+                <Col xs={12} sm={6} xl={3} className="mb-4">
+                  <CounterWidget
+                    category="Pending Vacancies"
+                    title={employeePendingVacancies}
+                    icon={faCashRegister}
+                    to={`/employee-detail/${emp._id}`}
+                  />
+                </Col>
+                <Col xs={12} sm={6} xl={3} className="mb-4">
+                  <CounterWidget
+                    category="Completed Vacancies"
+                    title={employeeCompletedVacancies}
+                    icon={faCashRegister}
+                    to={`/employee-detail/${emp._id}`}
+                  />
+                </Col>
+              </Row>
+            </React.Fragment>
+          );
+        }
+        return null;
+      })}
     </>
   );
 };

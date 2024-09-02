@@ -49,6 +49,10 @@ import WestTracker from './WestTracker';
 import CentralTracker from './CentralTracker';
 import TotalAllotedCompletedVacancy from '../components/TotalAllotedCompletedVacancy';
 import Enquiry from './Enquiry';
+import AllotedVacancies from '../components/Admin/AllotedVacancies';
+import CompletedVacancies from '../components/Admin/CompletedVacancies';
+import PendingVacancies from '../components/Admin/PendingVacancies';
+import NotEmailedVacancy from '../components/Admin/NotEmailedVacancy';
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -115,14 +119,21 @@ export default () => (
     <RouteWithLoader exact path={Routes.Lock.path} component={Lock} />
     <RouteWithLoader exact path={Routes.NotFound.path} component={NotFoundPage} />
     <RouteWithLoader exact path={Routes.ServerError.path} component={ServerError} />
+
     {/* pages */}
     <RouteWithSidebar exact path={Routes.DashboardOverview.path} component={DashboardOverview} condition={isEmployee()} />
     <RouteWithSidebar exact path={Routes.DashboardAdmin.path} component={DashBoardAdmin} condition={isLoggedIn()} />
+    <RouteWithSidebar exact path={Routes.AllotedVacancies.path} component={AllotedVacancies} condition={isLoggedIn()} />
+    <RouteWithSidebar exact path={Routes.AdminCompleted.path} component={CompletedVacancies} condition={isLoggedIn()} />
+    <RouteWithSidebar exact path={Routes.AdminPending.path} component={PendingVacancies} condition={isLoggedIn()} />
+    <RouteWithSidebar exact path={Routes.AdminEmailNotSent.path} component={NotEmailedVacancy} condition={isLoggedIn()} />
     <RouteWithSidebar exact path={Routes.Transactions.path} component={Transactions} condition={isLoggedIn()} />
     <RouteWithSidebar exact path={Routes.Settings.path} component={Settings} condition={isLoggedIn()} />
     <RouteWithSidebar exact path={Routes.Vacancy.path} component={Vacancy} condition={isLoggedIn()} />
     <RouteWithSidebar exact path={Routes.TotalAllotedVacancies.path} component={TotalAllotedVacancies} condition={isLoggedIn() || isEmployee()} />
     <RouteWithSidebar exact path={Routes.TotalPendingVacancies.path} component={TotalPendingVacancies} condition={isLoggedIn() || isEmployee()} />
+
+
 
     <RouteWithSidebar exact path={Routes.TotalAllotedCompletedVacancies.path} component={TotalAllotedCompletedVacancy} condition={isLoggedIn() || isEmployee()} />
 
