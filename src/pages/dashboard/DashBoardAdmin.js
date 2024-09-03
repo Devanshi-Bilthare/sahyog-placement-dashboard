@@ -26,7 +26,7 @@ export default () => {
   useEffect(() => {
     dispatch(getAllVacancies());
     dispatch(getAllEmployees());
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     if (allVacancies) {
@@ -94,7 +94,7 @@ export default () => {
         </Col>
       </Row>
 
-      {allEmployees?.map(emp => {
+      {allEmployees?.map((emp,idx) => {
         if (emp.role !== "admin") {
           if (!employeesData[emp._id]) {
             fetchEmployeeData(emp._id);
@@ -117,7 +117,7 @@ export default () => {
                     category="Alloted Vacancies"
                     title={employeeData.allotedVacancies?.length || 0}
                     icon={faChartLine}
-                    to={`/alloted-vacancies/${emp?._id}`}
+                    to={`/alloted-vacancies/${idx}`}
                   />
                 </Col>
                 <Col xs={12} sm={6} xl={3} className="mb-4">
@@ -125,7 +125,7 @@ export default () => {
                     category="Pending Vacancies"
                     title={employeePendingVacancies}
                     icon={faCashRegister}
-                    to={`/pending-vacancies/${emp?._id}`}
+                    to={`/pending-vacancies/${idx}`}
                   />
                 </Col>
                 <Col xs={12} sm={6} xl={3} className="mb-4">
@@ -133,7 +133,7 @@ export default () => {
                     category="Completed Vacancies"
                     title={employeeCompletedVacancies}
                     icon={faCashRegister}
-                    to={`/completed-vacancies/${emp?._id}`}
+                    to={`/completed-vacancies/${idx}`}
                   />
                 </Col>
               </Row>
