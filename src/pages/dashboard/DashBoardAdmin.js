@@ -109,7 +109,7 @@ export default () => {
           ).length || 0;
 
           return (
-            <React.Fragment key={emp._id}>
+            <React.Fragment key={emp?._id}>
               <h1>{emp?.name}</h1>
               <Row className="">
                 <Col xs={12} sm={6} xl={3} className="mb-4">
@@ -117,7 +117,7 @@ export default () => {
                     category="Alloted Vacancies"
                     title={employeeData.allotedVacancies?.length || 0}
                     icon={faChartLine}
-                    to={`/employee-detail/${emp._id}`}
+                    to={`/alloted-vacancies/${emp?._id}`}
                   />
                 </Col>
                 <Col xs={12} sm={6} xl={3} className="mb-4">
@@ -125,7 +125,7 @@ export default () => {
                     category="Pending Vacancies"
                     title={employeePendingVacancies}
                     icon={faCashRegister}
-                    to={`/employee-detail/${emp._id}`}
+                    to={`/pending-vacancies/${emp?._id}`}
                   />
                 </Col>
                 <Col xs={12} sm={6} xl={3} className="mb-4">
@@ -133,7 +133,7 @@ export default () => {
                     category="Completed Vacancies"
                     title={employeeCompletedVacancies}
                     icon={faCashRegister}
-                    to={`/employee-detail/${emp._id}`}
+                    to={`/completed-vacancies/${emp?._id}`}
                   />
                 </Col>
               </Row>

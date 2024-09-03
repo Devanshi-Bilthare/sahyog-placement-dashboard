@@ -8,12 +8,13 @@ import { AllotedVacansiesByEmployee } from '../components/Tables';
 
 
 export default () => {
-    // const dispatch = useDispatch()
-    // const {id} = useParams()
-    // useEffect(()=>{
-    //     dispatch(getSingleEmploye(id))
-    // },[])
+    const dispatch = useDispatch()
+    const {id} = useParams()
+    useEffect(()=>{
+        dispatch(getSingleEmploye(id))
+    },[])
 
+    console.log(id)
     const employeDetail = useSelector(state => state?.employee?.singleEmployee)
   return (
    <>

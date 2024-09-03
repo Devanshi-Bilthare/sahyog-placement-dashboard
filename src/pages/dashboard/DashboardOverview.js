@@ -47,7 +47,7 @@ export default () => {
             category="Alloted Vacancies"
             title={employee?.allotedVacancies?.length || 0}
             icon={faChartLine}
-            to='/alloted-vacancies'
+            to={`/alloted-vacancies/${employee?._id}`}
           />
         </Col>
         <Col xs={12} sm={6} xl={3} className="mb-4">
@@ -55,7 +55,7 @@ export default () => {
             category="Pending Vacancies"
             title={pendingVac}
             icon={faCashRegister}
-            to='/pending-vacancies'
+            to={`/pending-vacancies/${employee?._id}`}
           />
         </Col>
         <Col xs={12} sm={6} xl={3} className="mb-4">
@@ -63,7 +63,7 @@ export default () => {
             category="Completed Vacancies"
             title={employee?.allotedVacancies?.length-pendingVac}
             icon={faCashRegister}
-            to='/completed-vacancies'
+            to={`/completed-vacancies/${employee?._id}`}
           />
         </Col>
         <Col xs={12} sm={6} xl={3} className="mb-4">
