@@ -109,8 +109,8 @@ export default () => {
           ).length || 0;
 
           return (
-            <React.Fragment key={emp?._id}>
-              <h1>{emp?.name}</h1>
+            <div className='shadow-lg p-3 mb-3' key={emp?._id}>
+              <h1 className="">{emp?.name}</h1>
               <Row className="">
                 <Col xs={12} sm={6} xl={3} className="mb-4">
                   <CounterWidget
@@ -137,7 +137,7 @@ export default () => {
                   />
                 </Col>
               </Row>
-            </React.Fragment>
+            </div>
           );
         }
         return null;
