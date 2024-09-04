@@ -31,7 +31,7 @@ export const EmployerRegistrationForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(registerCompany(formData))
-    history.push('/')
+    history.push('/company-list')
     console.log("Form Data Submitted:", formData);
     // Perform further actions like sending data to an API or updating state
   };
@@ -59,7 +59,7 @@ export const EmployerRegistrationForm = () => {
               <Form.Group>
                 <Form.Label>Website</Form.Label>
                 <Form.Control
-                  required
+                  
                   type="url"
                   name="companyWebsite"
                   placeholder="Enter your company website"
@@ -74,7 +74,7 @@ export const EmployerRegistrationForm = () => {
               <Form.Group>
                 <Form.Label>Contact Person Name</Form.Label>
                 <Form.Control
-                  required
+                  
                   type="text"
                   name="contactPersonName"
                   placeholder="Enter contact person's name"
@@ -87,7 +87,7 @@ export const EmployerRegistrationForm = () => {
               <Form.Group>
                 <Form.Label>Contact Person Mobile</Form.Label>
                 <Form.Control
-                  required
+                  
                   type="tel"
                   name="contactPersonMobile"
                   placeholder="Enter contact person's mobile"
@@ -102,7 +102,7 @@ export const EmployerRegistrationForm = () => {
               <Form.Group>
                 <Form.Label>Contact Person Email</Form.Label>
                 <Form.Control
-                  required
+                  
                   type="email"
                   name="contactPersonEmail"
                   placeholder="Enter contact person's email"
@@ -115,7 +115,7 @@ export const EmployerRegistrationForm = () => {
               <Form.Group>
                 <Form.Label>Address</Form.Label>
                 <Form.Control
-                  required
+                  
                   type="text"
                   name="address"
                   placeholder="Enter your company address"
@@ -130,7 +130,7 @@ export const EmployerRegistrationForm = () => {
               <Form.Group>
                 <Form.Label>City</Form.Label>
                 <Form.Control
-                  required
+                  
                   type="text"
                   name="city"
                   placeholder="Enter your city"
@@ -143,7 +143,7 @@ export const EmployerRegistrationForm = () => {
               <Form.Group>
                 <Form.Label>Industry</Form.Label>
                 <Form.Control
-                  required
+                  
                   type="text"
                   name="industry"
                   placeholder="Enter your industry"

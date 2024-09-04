@@ -5,7 +5,7 @@ import { faAngleDown, faAngleUp, faArrowDown, faArrowUp, faEdit, faEllipsisH, fa
 import { Col, Row, Nav, Card, Image, Button,Form, Table, Dropdown, ProgressBar, Pagination, ButtonGroup } from '@themesberg/react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux'
-import { applyJob, candidateList, deleteCandidate, jobsAppliedByCandidate } from '../features/candidate/candidateSlice'
+import { applyJob, candidateList, deleteCandidate, editCandidate, jobsAppliedByCandidate } from '../features/candidate/candidateSlice'
 
 import { Routes } from "../routes";
 import { pageVisits, pageTraffic, pageRanking } from "../data/tables";
@@ -338,83 +338,178 @@ export const CandidateTable = () => {
   );
 };
 
-export const CandidateTableByJob = () => {
-    const [searchTerm, setSearchTerm] = useState(''); // State for search input
-    const [statusFilter, setStatusFilter] = useState(''); // State for status filter
+// export const CandidateTableByJob = () => {
+//     const [searchTerm, setSearchTerm] = useState(''); // State for search input
+//     const [statusFilter, setStatusFilter] = useState(''); // State for status filter
 
-    const candidateListState = useSelector(state => state?.candidate?.shortListedCandidateByJob);
-    // const vacancyListState = useSelector(state => state?.employee?.singleEmployee?.allotedVacancies);
-    const totalCandidates = candidateListState?.length;
+//     const candidateListState = useSelector(state => state?.candidate?.shortListedCandidateByJob);
+//     // const vacancyListState = useSelector(state => state?.employee?.singleEmployee?.allotedVacancies);
+//     const totalCandidates = candidateListState?.length;
+
+//   // Filter candidates based on search input and status filter
+//   const filteredCandidates = candidateListState?.filter(candidate =>
+//     candidate.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+//     (statusFilter === '' || candidate.status === statusFilter)
+//   );
+
+//   return (
+//     <>
+//       {/* Search Input and Status Filter */}
+//       <div className="mb-3 d-flex justify-content-between align-items-center">
+//         <Form.Control
+//           type="text"
+//           placeholder="Search by candidate name..."
+//           value={searchTerm}
+//           onChange={(e) => setSearchTerm(e.target.value)}
+//           style={{ width: '45%' }}
+//         />
+//         <Form.Control
+//           as="select"
+//           value={statusFilter}
+//           onChange={(e) => setStatusFilter(e.target.value)}
+//           style={{ width: '45%' }}
+//         >
+//           <option value="">Filter by status</option>
+//           {/* Add the possible status options based on your data */}
+//           <option value="Pending">Pending</option>
+//           <option value="shortlisted">ShortListed</option>
+//           <option value="Selected">Selected</option>
+//           <option value="Rejected">Rejected</option>
+//           {/* Add more status options as needed */}
+//         </Form.Control>
+//       </div>
+
+//       <Card border="light" className="table-wrapper table-responsive shadow-sm">
+//         <Card.Body className="pt-0">
+//           <Table hover className="user-table align-items-center">
+//             <thead>
+//               <tr>
+//                 <th className="border-bottom">S.NO</th>
+//                 <th className="border-bottom">Candidate Name</th>
+//                 <th className="border-bottom">Mobile</th>
+//                 <th className="border-bottom">Status</th>
+//                 <th className="border-bottom">  Action </th>
+//                 {/* <th className="border-bottom"><FontAwesomeIcon icon={faEdit} /></th> */}
+//               </tr>
+//             </thead>
+//             <tbody>
+//               {filteredCandidates?.map((candidate, idx) => (
+//                 <tr key={candidate._id}>
+//                   <td className="border-bottom">{idx + 1}</td>
+//                   <td className="border-bottom">
+//                     <Link to={`/candidate-detail/${candidate._id}`}>{candidate.name}</Link>
+//                   </td>
+//                   <td className="border-bottom">{candidate.mobile}</td>
+//                   <td className="border-bottom">{candidate.status}</td>
+//                   {/* <td className="border-bottom cursor-pointer" onClick={() => deleteHandler(candidate._id)}>  <FontAwesomeIcon icon={faTrashAlt} /> </td> */}
+//                   <td className="border-bottom">
+//                     <Link to={`/edit-candidate/${candidate._id}`}><FontAwesomeIcon icon={faEdit} /></Link>
+//                   </td>
+//                 </tr>
+//               ))}
+//             </tbody>
+//           </Table>
+       
+//         </Card.Body>
+//       </Card>
+
+//       {/* Select Vacancy and Apply Button */}
+//     </>
+//   );
+// };
+
+export const CandidateTableByJob = () => {
+  const [searchTerm, setSearchTerm] = useState(''); // State for search input
+  const [statusFilter, setStatusFilter] = useState(''); // State for status filter
+
+  const candidateListState = useSelector(state => state?.candidate?.shortListedCandidateByJob);
+  const dispatch = useDispatch();
+  
+  // Handle status change
+  const handleStatusChange = (candidateId, newStatus) => {
+    const candidateData = {
+      status:newStatus
+    }
+      // Dispatch an action to update the candidate's status in your state or backend
+      dispatch(editCandidate({id:candidateId,candidateData}));
+  };
 
   // Filter candidates based on search input and status filter
   const filteredCandidates = candidateListState?.filter(candidate =>
-    candidate.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-    (statusFilter === '' || candidate.status === statusFilter)
+      candidate.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      (statusFilter === '' || candidate.status === statusFilter)
   );
 
   return (
-    <>
-      {/* Search Input and Status Filter */}
-      <div className="mb-3 d-flex justify-content-between align-items-center">
-        <Form.Control
-          type="text"
-          placeholder="Search by candidate name..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          style={{ width: '45%' }}
-        />
-        <Form.Control
-          as="select"
-          value={statusFilter}
-          onChange={(e) => setStatusFilter(e.target.value)}
-          style={{ width: '45%' }}
-        >
-          <option value="">Filter by status</option>
-          {/* Add the possible status options based on your data */}
-          <option value="Pending">Pending</option>
-          <option value="shortlisted">ShortListed</option>
-          <option value="Selected">Selected</option>
-          <option value="Rejected">Rejected</option>
-          {/* Add more status options as needed */}
-        </Form.Control>
-      </div>
+      <>
+          {/* Search Input and Status Filter */}
+          <div className="mb-3 d-flex justify-content-between align-items-center">
+              <Form.Control
+                  type="text"
+                  placeholder="Search by candidate name..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  style={{ width: '45%' }}
+              />
+              <Form.Control
+                  as="select"
+                  value={statusFilter}
+                  onChange={(e) => setStatusFilter(e.target.value)}
+                  style={{ width: '45%' }}
+              >
+                  <option value="">Filter by status</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Shortlisted">ShortListed</option>
+                  <option value="Interview Scheduled">Interview Scheduled</option>
+                  <option value="Selected">Selected</option>
+                  <option value="Rejected">Rejected</option>
+              </Form.Control>
+          </div>
 
-      <Card border="light" className="table-wrapper table-responsive shadow-sm">
-        <Card.Body className="pt-0">
-          <Table hover className="user-table align-items-center">
-            <thead>
-              <tr>
-                <th className="border-bottom">S.NO</th>
-                <th className="border-bottom">Candidate Name</th>
-                <th className="border-bottom">Mobile</th>
-                <th className="border-bottom">Status</th>
-                <th className="border-bottom">  Action </th>
-                {/* <th className="border-bottom"><FontAwesomeIcon icon={faEdit} /></th> */}
-              </tr>
-            </thead>
-            <tbody>
-              {filteredCandidates?.map((candidate, idx) => (
-                <tr key={candidate._id}>
-                  <td className="border-bottom">{idx + 1}</td>
-                  <td className="border-bottom">
-                    <Link to={`/candidate-detail/${candidate._id}`}>{candidate.name}</Link>
-                  </td>
-                  <td className="border-bottom">{candidate.mobile}</td>
-                  <td className="border-bottom">{candidate.status}</td>
-                  {/* <td className="border-bottom cursor-pointer" onClick={() => deleteHandler(candidate._id)}>  <FontAwesomeIcon icon={faTrashAlt} /> </td> */}
-                  <td className="border-bottom">
-                    <Link to={`/edit-candidate/${candidate._id}`}><FontAwesomeIcon icon={faEdit} /></Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-       
-        </Card.Body>
-      </Card>
-
-      {/* Select Vacancy and Apply Button */}
-    </>
+          <Card border="light" className="table-wrapper table-responsive shadow-sm">
+              <Card.Body className="pt-0">
+                  <Table hover className="user-table align-items-center">
+                      <thead>
+                          <tr>
+                              <th className="border-bottom">S.NO</th>
+                              <th className="border-bottom">Candidate Name</th>
+                              <th className="border-bottom">Mobile</th>
+                              <th className="border-bottom">Status</th>
+                              <th className="border-bottom">Action</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {filteredCandidates?.map((candidate, idx) => (
+                              <tr key={candidate._id}>
+                                  <td className="border-bottom">{idx + 1}</td>
+                                  <td className="border-bottom">
+                                      <Link to={`/candidate-detail/${candidate._id}`}>{candidate.name}</Link>
+                                  </td>
+                                  <td className="border-bottom">{candidate.mobile}</td>
+                                  <td className="border-bottom">
+                                      <Form.Control
+                                          as="select"
+                                          value={candidate.status}  // Default to the candidate's current status
+                                          onChange={(e) => handleStatusChange(candidate._id, e.target.value)}
+                                      >
+                                        <option value={candidate.status}>{candidate.status}</option>
+                                          <option value="Pending">Pending</option>
+                                          <option value="shortlisted">ShortListed</option>
+                                          <option value="Interview Scheduled">Interview Scheduled</option>
+                                          <option value="Selected">Selected</option>
+                                          <option value="Rejected">Rejected</option>
+                                      </Form.Control>
+                                  </td>
+                                  <td className="border-bottom">
+                                      <Link to={`/edit-candidate/${candidate._id}`}><FontAwesomeIcon icon={faEdit} /></Link>
+                                  </td>
+                              </tr>
+                          ))}
+                      </tbody>
+                  </Table>
+              </Card.Body>
+          </Card>
+      </>
   );
 };
 
@@ -672,7 +767,6 @@ export const AdminTable = ({vacancyListState}) => {
 
 export const AllCompletedVacancyTable = () => {
   const dispatch = useDispatch();
-  const formatDate = (isoString) => new Date(isoString).toLocaleString();
 
   useEffect(() => {
     dispatch(getAllVacancies());
@@ -680,20 +774,26 @@ export const AllCompletedVacancyTable = () => {
   }, [dispatch]);
 
   const vacancyListState = useSelector((state) => state?.vacancy?.allVacancies);
-  const totalVacancies = vacancyListState?.length;
 
   const [updatedVacancy, setUpdatedVacancy] = useState({});
 
   // Function to handle mail status change
   const handleMailStatusChange = (vacancyId, status) => {
-    // Update the vacancy state
-    setUpdatedVacancy({ ...updatedVacancy, [vacancyId]: status });
-    // Dispatch action to update vacancy
+    setUpdatedVacancy({ ...updatedVacancy, [vacancyId]: { ...updatedVacancy[vacancyId], mail: status } });
     dispatch(editVacancy({ id: vacancyId, mail: status }));
   };
 
-  const deleteHandler = (id) => {
-    dispatch(deleteVacancy(id));
+  // Function to handle interview date change
+  const handleInterviewDateChange = (vacancyId, date) => {
+    setUpdatedVacancy({ ...updatedVacancy, [vacancyId]: { ...updatedVacancy[vacancyId], interviewSheduled: date } });
+    dispatch(editVacancy({ id: vacancyId, interviewSheduled: date }));
+  };
+
+  // Function to format the interview date to YYYY-MM-DD
+  const formatInterviewDate = (dateString) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    return date.toISOString().split('T')[0]; // Returns the date in YYYY-MM-DD format
   };
 
   return (
@@ -711,9 +811,7 @@ export const AllCompletedVacancyTable = () => {
               <th className="border-bottom">Dead Line</th>
               <th className="border-bottom">Completed At</th>
               <th className="border-bottom">Mail Status</th>
-              {/* Uncomment these headers if needed */}
-              {/* <th className="border-bottom"><FontAwesomeIcon icon={faTrashAlt} /></th> */}
-              {/* <th className="border-bottom"><FontAwesomeIcon icon={faEdit} /></th> */}
+              <th className="border-bottom">Interview Scheduled</th>
             </tr>
           </thead>
           <tbody>
@@ -729,30 +827,29 @@ export const AllCompletedVacancyTable = () => {
                   <td className="border-bottom">{vacancy.salary}</td>
                   <td className="border-bottom">{vacancy.allotedTo?.name}</td>
                   <td className="border-bottom">{vacancy.deadline}</td>
-                  <td className="border-bottom">{formatDate(vacancy.updatedAt)}</td>
+                  <td className="border-bottom">{new Date(vacancy.updatedAt).toLocaleString()}</td>
                   <td className="border-bottom">
                     <Form.Control
                       as="select"
-                      value={updatedVacancy[vacancy._id] || vacancy.mail}
+                      value={updatedVacancy[vacancy._id]?.mail || vacancy.mail}
                       onChange={(e) => handleMailStatusChange(vacancy._id, e.target.value)}
                     >
                       <option value="pending">Pending</option>
                       <option value="sent">Sent</option>
                     </Form.Control>
                   </td>
-                  {/* Uncomment these cells if needed */}
-                  {/* <td className="border-bottom cursor-pointer" onClick={() => deleteHandler(vacancy._id)}>
-                    <FontAwesomeIcon icon={faTrashAlt} />
-                  </td>
                   <td className="border-bottom">
-                    <Link to={`/edit-vacancy/${vacancy._id}`}><FontAwesomeIcon icon={faEdit} /></Link>
-                  </td> */}
+                    <input
+                      type="date"
+                      value={formatInterviewDate(updatedVacancy[vacancy._id]?.interviewSheduled || vacancy.interviewSheduled)}
+                      onChange={(e) => handleInterviewDateChange(vacancy._id, e.target.value)}
+                    />
+                  </td>
                 </tr>
               ) : null
             )}
           </tbody>
         </Table>
-      
       </Card.Body>
     </Card>
   );
@@ -959,6 +1056,7 @@ export const AllotedCompletedVacansiesByEmployee = ({ vacancyListState }) => {
               <th className="border-bottom">Salary</th>
               <th className="border-bottom">Deadline</th>
               <th className="border-bottom">Status</th>
+              <th className="border-bottom">Interview Sheduled</th>
             </tr>
           </thead>
           <tbody>
@@ -983,6 +1081,7 @@ export const AllotedCompletedVacansiesByEmployee = ({ vacancyListState }) => {
                       <option value="Pending">Pending</option>
                     </select>
                   </td>
+                  <td className="border-bottom">{vacancy.interviewSheduled ? new Date(vacancy.interviewSheduled).toLocaleDateString('en-GB') : 'NA'}</td>
                 </tr>
               ) : null
             ))}
@@ -992,6 +1091,60 @@ export const AllotedCompletedVacansiesByEmployee = ({ vacancyListState }) => {
     </Card>
   );
 };
+
+export const TodaysInterview = ({ vacancyListState }) => {
+  const today = new Date().toLocaleDateString('en-GB'); // Get today's date in DD-MM-YYYY format
+
+  // Filter the vacancies to only include those with today's interview date
+  const todaysInterviews = vacancyListState?.filter(vacancy => {
+    const interviewDate = new Date(vacancy.interviewSheduled).toLocaleDateString('en-GB');
+    return interviewDate === today;
+  });
+
+  return (
+    <Card border="light" className="table-wrapper table-responsive shadow-sm">
+      <Card.Body className="pt-0">
+        <Table hover className="user-table align-items-center">
+          <thead>
+            <tr>
+              <th className="border-bottom">S.NO</th>
+              <th className="border-bottom">Job Title</th>
+              <th className="border-bottom">Company Name</th>
+              <th className="border-bottom">Location</th>
+              <th className="border-bottom">Salary</th>
+              <th className="border-bottom">Deadline</th>
+              <th className="border-bottom">Status</th>
+              <th className="border-bottom">Interview Scheduled</th>
+            </tr>
+          </thead>
+          <tbody>
+            {todaysInterviews?.map((vacancy, idx) => (
+              <tr key={vacancy._id}>
+                <td className="border-bottom">{idx + 1}</td>
+                <td className="border-bottom">
+                  <Link to={`/candidate-shortlisted/${vacancy._id}`}>{vacancy.role}</Link>
+                </td>
+                <td className="border-bottom">{vacancy.companyName}</td>
+                <td className="border-bottom">{vacancy.jobLocation}</td>
+                <td className="border-bottom">{vacancy.salary}</td>
+                <td className="border-bottom">{vacancy.deadline}</td>
+                <td className="border-bottom">
+                 {vacancy.status}
+                </td>
+                <td className="border-bottom">
+                  {vacancy.interviewSheduled
+                    ? new Date(vacancy.interviewSheduled).toLocaleDateString('en-GB')
+                    : 'NA'}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </Card.Body>
+    </Card>
+  );
+};
+
 
 export const MailSentVacanciesByEmployee = ({ vacancyListState }) => {
   const dispatch = useDispatch();
@@ -1017,6 +1170,7 @@ export const MailSentVacanciesByEmployee = ({ vacancyListState }) => {
               <th className="border-bottom">Salary</th>
               <th className="border-bottom">Dead Line</th>
               <th className="border-bottom">Status</th>
+              <th className="border-bottom">Interview sheduled</th>
             </tr>
           </thead>
           <tbody>
@@ -1038,6 +1192,7 @@ export const MailSentVacanciesByEmployee = ({ vacancyListState }) => {
                   <option value="Pending">Pending</option>
                 </select>
               </td>
+              <td className="border-bottom">{vacancy.interviewSheduled ? vacancy.interviewSheduled : "NA"}</td>
             </tr>  :null
             ))}
           </tbody>

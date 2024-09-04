@@ -27,13 +27,15 @@ import HomePage from "./pages/HomePage";
 import ScrollToTop from "./components/ScrollToTop";
 import { Provider } from 'react-redux';
 import { store } from './store/store';
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
   <HashRouter>
   <Provider store={store}>
     <ScrollToTop />
     <HomePage />
-    {/* <ToastContainer
+    <ToastContainer
       position="top-right"
       autoClose={5000}
       hideProgressBar={false}
@@ -44,7 +46,7 @@ ReactDOM.render(
       draggable
       pauseOnHover
       theme="light"
-    /> */}
+    />
   </Provider>
   </HashRouter>,
   document.getElementById("root")

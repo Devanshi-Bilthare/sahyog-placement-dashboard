@@ -86,7 +86,7 @@ export default function EditCompanyForm() {
                 <Form.Group>
                   <Form.Label>Website</Form.Label>
                   <Form.Control
-                    required
+                    
                     type="url"
                     name="companyWebsite"
                     placeholder="Enter your company website"
@@ -101,7 +101,7 @@ export default function EditCompanyForm() {
                 <Form.Group>
                   <Form.Label>Contact Person Name</Form.Label>
                   <Form.Control
-                    required
+                    
                     type="text"
                     name="contactPersonName"
                     placeholder="Enter contact person's name"
@@ -114,7 +114,7 @@ export default function EditCompanyForm() {
                 <Form.Group>
                   <Form.Label>Contact Person Mobile</Form.Label>
                   <Form.Control
-                    required
+                    
                     type="tel"
                     name="contactPersonMobile"
                     placeholder="Enter contact person's mobile"
@@ -129,7 +129,7 @@ export default function EditCompanyForm() {
                 <Form.Group>
                   <Form.Label>Contact Person Email</Form.Label>
                   <Form.Control
-                    required
+                    
                     type="email"
                     name="contactPersonEmail"
                     placeholder="Enter contact person's email"
@@ -142,7 +142,7 @@ export default function EditCompanyForm() {
                 <Form.Group>
                   <Form.Label>Address</Form.Label>
                   <Form.Control
-                    required
+                    
                     type="text"
                     name="address"
                     placeholder="Enter your company address"
@@ -157,7 +157,7 @@ export default function EditCompanyForm() {
                 <Form.Group>
                   <Form.Label>City</Form.Label>
                   <Form.Control
-                    required
+                    
                     type="text"
                     name="city"
                     placeholder="Enter your city"

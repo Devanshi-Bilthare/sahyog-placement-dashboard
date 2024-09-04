@@ -1,5 +1,6 @@
 import {createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import employeeService from "./employeeService";
+import { toast } from "react-toastify";
 // import { toast } from "react-toastify";
 
 const getEmployeeFromLocalStorage = localStorage.getItem('employee') ? JSON.parse(localStorage.getItem('employee')):null
@@ -75,19 +76,18 @@ export const employeeSlice = createSlice({
             state.isLoading = false
             state.isSuccess = true
             state.employee = action.payload
-            // if(state.isSuccess == true){
-            //     toast.info("User Created successfully")
-            // }
+            if(state.isSuccess == true){
+                toast.info("Employee registered successfully")
+            }
         })
         .addCase(registerEmployee.rejected,(state,action)=>{
             state.isLoading = false
             state.isError=true
             state.isSuccess = false
             state.employee = null
-            // if(state.isError == true){
-            //     console.log(action)
-            //     toast.error(action.payload.response.data.message)
-            // }
+            if(state.isError == true){
+                toast.error(action.payload.response.data.message)
+            }
         })
 
         .addCase(loginEmployee.pending,(state)=>{
@@ -155,10 +155,9 @@ export const employeeSlice = createSlice({
             state.isLoading = false
             state.isSuccess = true
             state.editedEmployee = action.payload
-            // if(state.isSuccess == true){
-            //     console.log(state)
-            //     toast.info("User Logged In")
-            // }
+            if(state.isSuccess == true){
+                toast.info("Employee edited successfully")
+            }
         })
         .addCase(editEmployee.rejected,(state,action)=>{
             state.isLoading = false
@@ -174,10 +173,9 @@ export const employeeSlice = createSlice({
             state.isLoading = false
             state.isSuccess = true
             state.deletedEmployee = action.payload
-            // if(state.isSuccess == true){
-            //     console.log(state)
-            //     toast.info("User Logged In")
-            // }
+            if(state.isSuccess == true){
+                toast.info("Employee deleted")
+            }
         })
         .addCase(deleteEmployee.rejected,(state,action)=>{
             state.isLoading = false

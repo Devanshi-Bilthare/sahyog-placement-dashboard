@@ -53,6 +53,7 @@ import AllotedVacancies from '../components/Admin/AllotedVacancies';
 import CompletedVacancies from '../components/Admin/CompletedVacancies';
 import PendingVacancies from '../components/Admin/PendingVacancies';
 import NotEmailedVacancy from '../components/Admin/NotEmailedVacancy';
+import TodaysInterview from '../components/TodaysInterview';
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -132,6 +133,7 @@ export default () => (
     <RouteWithSidebar exact path={Routes.Vacancy.path} component={Vacancy} condition={isLoggedIn()} />
     <RouteWithSidebar exact path={Routes.TotalAllotedVacancies.path} component={TotalAllotedVacancies} condition={isLoggedIn() || isEmployee()} />
     <RouteWithSidebar exact path={Routes.TotalPendingVacancies.path} component={TotalPendingVacancies} condition={isLoggedIn() || isEmployee()} />
+    <RouteWithSidebar exact path={Routes.TodaysInterview.path} component={TodaysInterview} condition={isLoggedIn() || isEmployee()} />
 
 
 

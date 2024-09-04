@@ -1,5 +1,6 @@
 import {createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import vacancyService from "./vacancyService";
+import { toast } from "react-toastify";
 
 
 export const getAllVacancies = createAsyncThunk('vacancy/get-all',async(thunkApi)=>{
@@ -64,10 +65,7 @@ export const vacancySlice = createSlice({
             state.isLoading = false
             state.isSuccess = true
             state.allVacancies = action.payload
-            // if(state.isSuccess == true){
-            //     console.log(state)
-            //     toast.info("User Logged In")
-            // }
+          
         })
         .addCase(getAllVacancies.rejected,(state,action)=>{
             state.isLoading = false
@@ -82,10 +80,9 @@ export const vacancySlice = createSlice({
             state.isLoading = false
             state.isSuccess = true
             state.deletedVacancy = action.payload
-            // if(state.isSuccess == true){
-            //     console.log(state)
-            //     toast.info("User Logged In")
-            // }
+            if(state.isSuccess == true){
+                toast.info("Vacancy deleted successfully")
+            }
         })
         .addCase(deleteVacancy.rejected,(state,action)=>{
             state.isLoading = false
@@ -101,16 +98,18 @@ export const vacancySlice = createSlice({
             state.isLoading = false
             state.isSuccess = true
             state.editedVacancy = action.payload
-            // if(state.isSuccess == true){
-            //     console.log(state)
-            //     toast.info("User Logged In")
-            // }
+            if(state.isSuccess == true){
+                toast.info("Vacancy edited successfully")
+            }
         })
         .addCase(editVacancy.rejected,(state,action)=>{
             state.isLoading = false
             state.isError=true
             state.isSuccess = false
             state.editedVacancy = null
+            if(state.isError == true){
+                toast.error(action.payload.response.data.message)
+            }
         })
 
         .addCase(getSingleVacancies.pending,(state)=>{
@@ -139,16 +138,19 @@ export const vacancySlice = createSlice({
             state.isLoading = false
             state.isSuccess = true
             state.createdVacancy = action.payload
-            // if(state.isSuccess == true){
-            //     console.log(state)
-            //     toast.info("User Logged In")
-            // }
+            if(state.isSuccess == true){
+               
+                toast.info("vacancy created successfully")
+            }
         })
         .addCase(createVacancy.rejected,(state,action)=>{
             state.isLoading = false
             state.isError=true
             state.isSuccess = false
             state.createdVacancy = null
+            if(state.isError == true){
+                toast.error(action.payload.response.data.message)
+            }
         })
 
 

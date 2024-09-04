@@ -1,5 +1,6 @@
 import {createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import companyService from "./companyService";
+import { toast } from "react-toastify";
 
 export const registerCompany = createAsyncThunk('company/register',async(companyData,thunkApi)=>{
     try{
@@ -63,19 +64,18 @@ export const companySlice = createSlice({
             state.isLoading = false
             state.isSuccess = true
             state.companyData = action.payload
-            // if(state.isSuccess == true){
-            //     toast.info("Company Registered")
-            // }
+            if(state.isSuccess == true){
+                toast.info("Company Registered")
+            }
         })
         .addCase(registerCompany.rejected,(state,action)=>{
             state.isLoading = false
             state.isError=true
             state.isSuccess = false
             state.companyData = null
-            // if(state.isError == true){
-            //     console.log(action)
-            //     toast.error(action.payload.response.data.message)
-            // }
+            if(state.isError == true){
+                toast.error(action.payload.response.data.message)
+            }
         })
         .addCase(getAllCompanies.pending,(state)=>{
             state.isLoading = true
@@ -102,10 +102,9 @@ export const companySlice = createSlice({
             state.isLoading = false
             state.isSuccess = true
             state.deletedCompany = action.payload
-            // if(state.isSuccess == true){
-            //     console.log(state)
-            //     toast.info("User Logged In")
-            // }
+            if(state.isSuccess == true){
+                toast.info("company deleted successfully")
+            }
         })
         .addCase(deleteCompany.rejected,(state,action)=>{
             state.isLoading = false
@@ -121,10 +120,9 @@ export const companySlice = createSlice({
             state.isLoading = false
             state.isSuccess = true
             state.editedCompany = action.payload
-            // if(state.isSuccess == true){
-            //     console.log(state)
-            //     toast.info("User Logged In")
-            // }
+            if(state.isSuccess == true){
+                toast.info("Compnay edited successfully")
+            }
         })
         .addCase(editCompany.rejected,(state,action)=>{
             state.isLoading = false

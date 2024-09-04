@@ -69,7 +69,7 @@ export default () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(editVacancy({ id, ...formData }));
-        history.push('/'); // Redirect to the desired page after submission
+        history.push('/vacancy-list'); // Redirect to the desired page after submission
     };
 
     return (
@@ -96,7 +96,7 @@ export default () => {
                                 <Form.Group id="role">
                                     <Form.Label>Designation</Form.Label>
                                     <Form.Control
-                                        required
+                                        
                                         type="text"
                                         name="role"
                                         placeholder="Enter Designation"
@@ -111,7 +111,7 @@ export default () => {
                                 <Form.Group id="experienceRequired">
                                     <Form.Label>Experience Required</Form.Label>
                                     <Form.Control
-                                        required
+                                        
                                         type="text"
                                         name="experienceRequired"
                                         placeholder="Enter Experience Required"
@@ -124,7 +124,7 @@ export default () => {
                                 <Form.Group id="skillsRequired">
                                     <Form.Label>Skills Required</Form.Label>
                                     <Form.Control
-                                        required
+                                        
                                         type="text"
                                         name="skillsRequired"
                                         placeholder="Enter Skills Required"
@@ -139,7 +139,7 @@ export default () => {
                                 <Form.Group id="ageRequired">
                                     <Form.Label>Age Required</Form.Label>
                                     <Form.Control
-                                        required
+                                        
                                         type="text"
                                         name="ageRequired"
                                         placeholder="Enter Age Required"
@@ -178,7 +178,7 @@ export default () => {
                                 <Form.Group id="numberOfJobOpenings">
                                     <Form.Label>No of Posts</Form.Label>
                                     <Form.Control
-                                        required
+                                        
                                         type="text"
                                         name="numberOfJobOpenings"
                                         placeholder="Enter No of Posts"
@@ -193,7 +193,7 @@ export default () => {
                                 <Form.Group id="salary">
                                     <Form.Label>Salary</Form.Label>
                                     <Form.Control
-                                        required
+                                        
                                         type="text"
                                         name="salary"
                                         placeholder="Enter Salary"
@@ -206,7 +206,7 @@ export default () => {
                                 <Form.Group id="jobLocation">
                                     <Form.Label>Job Location</Form.Label>
                                     <Form.Control
-                                        required
+                                        
                                         type="text"
                                         name="jobLocation"
                                         placeholder="Enter Job Location"
@@ -233,7 +233,7 @@ export default () => {
                                 <Form.Group id="jobDescription">
                                     <Form.Label>Job Description</Form.Label>
                                     <Form.Control
-                                        required
+                                        
                                         type="text"
                                         name="jobDescription"
                                         placeholder="Enter Job Description"

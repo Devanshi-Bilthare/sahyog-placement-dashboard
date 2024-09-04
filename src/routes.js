@@ -17,6 +17,7 @@ export const Routes = {
     AdminEmailNotSent:{path:'/admin/emailSent-vacancies'},
     TotalPendingVacancies:{path:'/pending-vacancies/:id'},
     TotalAllotedCompletedVacancies:{path:'/completed-vacancies/:id'},
+    TodaysInterview:{path:'/todays-interviews/:id'},
     MailSentVacanciesByEmployee:{path:'/mail-sent'},
     Enquiry:{path:'/enquiry'},
     Employer: { path: "/add-company" },

@@ -268,7 +268,7 @@ export default () => {
                     <Form.Group>
                       <Form.Label>Skills</Form.Label>
                       <Form.Control
-                        required
+                        // required
                         type="text"
                         name="skillsRequired"
                         placeholder="Enter Skills"
@@ -416,7 +416,7 @@ export default () => {
                     <Form.Group>
                       <Form.Label>Job Description</Form.Label>
                       <Form.Control
-                        required
+                        
                         as="textarea"
                         rows="4"
                         name="jobDescription"

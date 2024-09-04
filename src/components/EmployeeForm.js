@@ -60,6 +60,8 @@ export const EmployeeForm = () => {
                                     type="tel"
                                     placeholder="Enter Employee Mobile"
                                 />
+                                  {formData.mobile && formData.mobile.length !== 10 && (
+    <small className="text-danger">Mobile number must be 10 digits.</small>)}
                             </Form.Group>
                         </Col>
                     </Row>
@@ -71,7 +73,7 @@ export const EmployeeForm = () => {
                                     name="email"
                                     value={formData.email}
                                     onChange={changeHandler}
-                                    required
+                                    // required
                                     type="email"
                                     placeholder="Enter Employee Email"
                                 />
@@ -117,7 +119,7 @@ export const EmployeeForm = () => {
                                     name="city"
                                     value={formData.city}
                                     onChange={changeHandler}
-                                    required
+                                    // required
                                     type="text"
                                     placeholder="Enter City"
                                 />
@@ -133,7 +135,7 @@ export const EmployeeForm = () => {
                                     name="address"
                                     value={formData.address}
                                     onChange={changeHandler}
-                                    required
+                                    // required
                                     type="text"
                                     placeholder="Enter Address"
                                 />
