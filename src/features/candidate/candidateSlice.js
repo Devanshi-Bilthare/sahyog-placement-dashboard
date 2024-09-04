@@ -1,6 +1,7 @@
 import {createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 // import { toast } from "react-toastify";
 import candidateService from "./candidateService";
+import { toast } from "react-toastify";
 
 export const registerCandidate = createAsyncThunk('auth/candidate-register',async(candidate,thunkApi)=>{
     try{
@@ -97,19 +98,18 @@ export const candidateSlice = createSlice({
             state.isLoading = false
             state.isSuccess = true
             state.candidate = action.payload
-            // if(state.isSuccess == true){
-            //     toast.info("User Created successfully")
-            // }
+            if(state.isSuccess == true){
+                toast.info("Candidate Registered successfully")
+            }
         })
         .addCase(registerCandidate.rejected,(state,action)=>{
             state.isLoading = false
             state.isError=true
             state.isSuccess = false
             state.candidate = null
-            // if(state.isError == true){
-            //     console.log(action)
-            //     toast.error(action.payload.response.data.message)
-            // }
+            if(state.isError == true){
+                toast.error(action.payload.response.data.message)
+            }
         })
         .addCase(candidateProfile.pending,(state)=>{
             state.isLoading = true
@@ -160,9 +160,9 @@ export const candidateSlice = createSlice({
             state.isLoading = false
             state.isSuccess = true
             state.deletedCandidate = action.payload
-            // if(state.isSuccess == true){
-            //     toast.info("User Created")
-            // }
+            if(state.isSuccess == true){
+                toast.info("Candidate Deleted")
+            }
         })
         .addCase(deleteCandidate.rejected,(state,action)=>{
             state.isLoading = false
@@ -202,19 +202,18 @@ export const candidateSlice = createSlice({
             state.isLoading = false
             state.isSuccess = true
             state.editedCandidate = action.payload
-            // if(state.isSuccess == true){
-            //     toast.info("User Created")
-            // }
+            if(state.isSuccess == true){
+                toast.info("Candidate edited Successfully")
+            }
         })
         .addCase(editCandidate.rejected,(state,action)=>{
             state.isLoading = false
             state.isError=true
             state.isSuccess = false
             state.editedCandidate = null
-            // if(state.isError == true){
-            //     console.log(action)
-            //     toast.error(action.payload.response.data.message)
-            // }
+            if(state.isError == true){
+                toast.error(action.payload.response.data.message)
+            }
         })
 
         .addCase(jobsAppliedByCandidate.pending,(state)=>{
@@ -246,18 +245,18 @@ export const candidateSlice = createSlice({
             state.isLoading = false
             state.isSuccess = true
             state.applyJob = action.payload
-            // if(state.isSuccess == true){
-            //     toast.success("Job application submitted ")
-            // }
+            if(state.isSuccess == true){
+                toast.success("candidate shortlisted ")
+            }
         })
         .addCase(applyJob.rejected,(state,action)=>{
             state.isLoading = false
             state.isError=true
             state.isSuccess = false
             state.applyJob = null
-            // if(state.isSuccess == true){
-            //     toast.error("job Application failed ")
-            // }
+            if(state.isSuccess == true){
+                toast.error(action.payload.response.data.message)
+            }
         })
 
         .addCase(shortListedCandidateByJob.pending,(state)=>{
