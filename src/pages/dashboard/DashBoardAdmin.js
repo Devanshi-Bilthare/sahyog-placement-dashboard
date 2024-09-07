@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCashRegister, faChartLine } from '@fortawesome/free-solid-svg-icons';
-import { Col, Row } from '@themesberg/react-bootstrap';
+import { Card, Col, Row, Table } from '@themesberg/react-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
 import { CounterWidget } from "../../components/Widgets";
 import { getAllVacancies } from "../../features/vacancy/vacancySlice";
 import { getAllEmployees, getSingleEmploye } from "../../features/employee/employeeSlice";
+import { Link } from "react-router-dom";
 
 export default () => {
   const dispatch = useDispatch();
@@ -93,8 +94,22 @@ export default () => {
           />
         </Col>
       </Row>
+      <Card border="light" className="table-wrapper table-responsive shadow-sm">
+      <Card.Body className="pt-0">
+        <Table hover className="user-table align-items-center">
+          <thead>
+            <tr>
+              <th className="border-bottom">S.NO</th>
+              <th className="border-bottom">Employee Name</th>
+              <th className="border-bottom">Alloted Vacancy</th>
+              <th className="border-bottom">Pendind Vacancy</th>
+              <th className="border-bottom">Completed Vacancy</th>
+              <th className="border-bottom">Todays Interview</th>
 
-      {allEmployees?.map((emp,idx) => {
+            </tr>
+          </thead>
+         
+          {allEmployees?.map((emp,idx) => {
         if (emp.role !== "admin") {
           if (!employeesData[emp._id]) {
             fetchEmployeeData(emp._id);
@@ -115,47 +130,24 @@ export default () => {
           }).length;
 
           return (
-            <div className='shadow-lg p-3 mb-3' key={emp?._id}>
-              <h1 className="">{emp?.name}</h1>
-              <Row className="">
-                <Col xs={12} sm={6} xl={3} className="mb-4">
-                  <CounterWidget
-                    category="Alloted Vacancies"
-                    title={employeeData.allotedVacancies?.length || 0}
-                    icon={faChartLine}
-                    to={`/alloted-vacancies/${idx}`}
-                  />
-                </Col>
-                <Col xs={12} sm={6} xl={3} className="mb-4">
-                  <CounterWidget
-                    category="Pending Vacancies"
-                    title={employeePendingVacancies}
-                    icon={faCashRegister}
-                    to={`/pending-vacancies/${idx}`}
-                  />
-                </Col>
-                <Col xs={12} sm={6} xl={3} className="mb-4">
-                  <CounterWidget
-                    category="Completed Vacancies"
-                    title={employeeCompletedVacancies}
-                    icon={faCashRegister}
-                    to={`/completed-vacancies/${idx}`}
-                  />
-                </Col>
-                <Col xs={12} sm={6} xl={3} className="mb-4">
-                  <CounterWidget
-                    category="Todays Interview"
-                    title={interviewCount}
-                    icon={faCashRegister}
-                    to={`/todays-interviews/${idx}`}
-                  />
-                </Col>
-              </Row>
-            </div>
+            <tbody>
+              <tr>
+              <td className="border-bottom">{idx}</td>
+              <td className="border-bottom">{emp?.name}</td>
+            <td className="border-bottom"><Link to={`/alloted-vacancies/${idx}`}>{employeeData.allotedVacancies?.length || 0} </Link></td> 
+             <td className="border-bottom"><Link to={`/pending-vacancies/${idx}`}>{employeePendingVacancies}</Link></td>
+              <td className="border-bottom"><Link to={`/completed-vacancies/${idx}`}>{employeeCompletedVacancies}</Link></td>
+              <td className="border-bottom"><Link to={`/todays-interviews/${idx}`}>{interviewCount}</Link></td>
+              </tr>
+              </tbody>
           );
         }
         return null;
-      })}
+      })} 
+        </Table>
+      
+      </Card.Body>
+    </Card>
     </>
   );
 };

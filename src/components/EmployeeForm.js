@@ -15,11 +15,19 @@ export const EmployeeForm = () => {
         mobile: "",
         city: "",
         gender: "",
-        password:""
+        password:"",
+        storePassword:""
     });
 
     const changeHandler = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        
+        // Check if the changed field is the password field
+        if (name === "password") {
+            setFormData({ ...formData, password: value, storePassword: value });
+        } else {
+            setFormData({ ...formData, [name]: value });
+        }
     };
 
     const formHandler = (e) => {

@@ -537,6 +537,8 @@ export const EmployeeTable = () => {
                 <th className="border-bottom">S.NO</th>
                 <th className="border-bottom">Employee Name</th>
                 <th className="border-bottom">Mobile</th>
+                <th className="border-bottom">Email</th>
+                <th className="border-bottom">Password</th>
                  <th className="border-bottom">Action</th> 
                 {/* <th className="border-bottom">Total</th>
                 <th className="border-bottom">Status</th>
@@ -551,7 +553,8 @@ export const EmployeeTable = () => {
                 <td className="border-bottom">{idx+1}</td>
                 <td className="border-bottom"><Link to={`/employee-detail/${employee._id}`}>{employee.name}</Link></td>
                 <td className="border-bottom">{employee.mobile}</td>
-                {/* <td className="border-bottom">{employee.status}</td> */}
+                <td className="border-bottom">{employee.email}</td>
+                <td className="border-bottom">{employee.storePassword}</td>
                 <th className="border-bottom cursor-pointer" >  <FontAwesomeIcon onClick={()=> deleteHandler(employee._id)} icon={faTrashAlt} /> 
                 <Link className="ms-2" to={`/edit-employee/${employee._id}`}><FontAwesomeIcon icon={faEdit} /></Link></th>
                 </tr> : null
