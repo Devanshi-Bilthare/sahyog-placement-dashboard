@@ -24,7 +24,9 @@ export default () => {
         jobLocation: "",
         deadline: "",
         jobDescription: "",
-        allotedTo:""
+        allotedTo:"",
+        jobFunction:"",
+        city:""
     });
 
     // Fetch the single vacancy details and set the form data
@@ -51,7 +53,9 @@ export default () => {
                 jobLocation: vacancyDetails.jobLocation || "",
                 deadline: vacancyDetails.deadline || "",
                 jobDescription: vacancyDetails.jobDescription || "",
-                allotedTo: vacancyDetails.allotedTo || ""
+                allotedTo: vacancyDetails.allotedTo || null,
+                jobFunction: vacancyDetails.jobFunction || "",
+                city: vacancyDetails.city || ""
             });
         }
     }, [vacancyDetails]);
@@ -230,6 +234,7 @@ export default () => {
                                 </Form.Group>
                             </Col>
                             <Col md={6} className="mb-3">
+
                                 <Form.Group id="jobDescription">
                                     <Form.Label>Job Description</Form.Label>
                                     <Form.Control
@@ -261,6 +266,32 @@ export default () => {
                         </option> : null
                         ))}
                       </Form.Control>
+                    </Form.Group>
+                  </Col>
+                  <Col md={6} className="mb-3">
+                    <Form.Group>
+                      <Form.Label>Function</Form.Label>
+                      <Form.Control
+                        required
+                        name="jobFunction"
+                        placeholder="Enter Job Function"
+                        value={formData.jobFunction}
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Col>
+
+                  <Col md={6} className="mb-3">
+                    <Form.Group>
+                      <Form.Label>City</Form.Label>
+                      <Form.Control
+                        // required
+                        type="text"
+                        name="city"
+                        placeholder="Enter City"
+                        value={formData.city}
+                        onChange={handleChange}
+                      />
                     </Form.Group>
                   </Col>
                         </Row>

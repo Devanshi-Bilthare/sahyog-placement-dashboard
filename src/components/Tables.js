@@ -11,7 +11,7 @@ import { Routes } from "../routes";
 import { pageVisits, pageTraffic, pageRanking } from "../data/tables";
 import transactions from "../data/transactions";
 import commands from "../data/commands";
-import { deleteEmployee, getAllEmployees } from "../features/employee/employeeSlice";
+import { deleteEmployee, getAllEmployees, loginEmployee } from "../features/employee/employeeSlice";
 import { deleteCompany, getAllCompanies } from "../features/company/companySlice";
 import { deleteVacancy, editVacancy, getAllVacancies } from "../features/vacancy/vacancySlice";
 
@@ -527,6 +527,13 @@ export const EmployeeTable = () => {
         history.push('/employee-list')
       },100)
     }
+
+    const signInHandler = (email, password) => {
+      dispatch(loginEmployee({ email, password }));
+      setTimeout(() => {
+        history.push('/dashboard'); // Redirect after successful login
+      }, 500);
+    };
     
   return (
     <Card border="light" className="table-wrapper table-responsive shadow-sm">
@@ -557,6 +564,9 @@ export const EmployeeTable = () => {
                 <td className="border-bottom">{employee.storePassword}</td>
                 <th className="border-bottom cursor-pointer" >  <FontAwesomeIcon onClick={()=> deleteHandler(employee._id)} icon={faTrashAlt} /> 
                 <Link className="ms-2" to={`/edit-employee/${employee._id}`}><FontAwesomeIcon icon={faEdit} /></Link></th>
+                <td className="border-bottom"> <button onClick={() => signInHandler(employee.email, employee.storePassword)} className="btn btn-primary btn-sm">
+                      Sign In
+                    </button></td>
                 </tr> : null
               }) 
             } 

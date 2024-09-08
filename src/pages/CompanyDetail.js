@@ -39,8 +39,9 @@ export default () => {
     jobLocation: "",
     deadline: "",
     jobDescription: "",
-    allotedTo:"",
-    jobFunction:""
+    allotedTo:null,
+    jobFunction:"",
+    city:""
   });
 
   const handleVacancyChange = (e) => {
@@ -363,15 +364,15 @@ export default () => {
                   </Col>
                 </Row>
                 <Row>
-                  <Col md={6} className="mb-3">
+                <Col md={6} className="mb-3">
                     <Form.Group>
-                      <Form.Label>Deadline</Form.Label>
+                      <Form.Label>City</Form.Label>
                       <Form.Control
-                        required
-                        type="date"
-                        name="deadline"
-                        placeholder="Enter Deadline"
-                        value={vacancyFormData.deadline}
+                        // required
+                        type="text"
+                        name="city"
+                        placeholder="Enter City"
+                        value={vacancyFormData.city}
                         onChange={handleVacancyChange}
                       />
                     </Form.Group>
@@ -384,9 +385,8 @@ export default () => {
                         name="allotedTo"
                         value={vacancyFormData.allotedTo}
                         onChange={handleVacancyChange}
-                        required
                       >
-                        <option value="">Select Employee</option>
+                        <option value={null}>Select Employee</option>
                         {employees.map(employee => (
                           employee.role != 'admin' ? <option key={employee.id} value={employee._id}>
                           {employee.name}
@@ -409,7 +409,19 @@ export default () => {
                       />
                     </Form.Group>
                   </Col>
-                 
+                  <Col md={6} className="mb-3">
+                    <Form.Group>
+                      <Form.Label>Deadline</Form.Label>
+                      <Form.Control
+                        required
+                        type="date"
+                        name="deadline"
+                        placeholder="Enter Deadline"
+                        value={vacancyFormData.deadline}
+                        onChange={handleVacancyChange}
+                      />
+                    </Form.Group>
+                  </Col>
                 </Row>
                 <Row>
                   <Col md={12} className="mb-3">

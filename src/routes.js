@@ -27,6 +27,7 @@ export const Routes = {
     SouthTracker: {path:"/south-tracker/:id"},
     WestTracker: {path:"/west-tracker/:id"},
     CentralTracker: {path:"/central-tracker/:id"},
+    NorthTracker: {path:"/north-tracker/:id"},
     EditCandidate: { path: "/edit-candidate/:id" },
     CandidateDetail: { path: "/candidate-detail/:id" },
     CandidateShortListedByJob:{path:"/candidate-shortlisted/:id"},
